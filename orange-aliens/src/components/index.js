@@ -1,3 +1,3 @@
-export {default as Header} from './header/header';
-export {default as Login} from './login/login';
-export {default as register} from './register/register';
+export {default as Header} from './Header/Header';
+export {default as Login} from './Login/Login';
+export {default as Register} from './Register/Register';

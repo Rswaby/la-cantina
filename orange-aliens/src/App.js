@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import Header from './components/header/header';
+import { Link } from 'react-router-dom';
+import {
+	Card, CardContent, Typography, 
+	Grid, withStyles, CardMedia,
+	CardActionArea,
+} from '@material-ui/core';
 import './App.css';
+//import LandingPage from './components/LandingPage/LandingPage';
 
-class App extends Component {
+const styles = theme => ({
+	main_grid: {
+		"margin-top": 20,
+	},
+	card: {
+	},
+	media: {
+		height: 200,
+	},
+})
+
+export class App extends Component {
+
   render() {
+		const { classes, user,
+			handleModalClose, handleModalOpen } = this.props;
     return (
-      <div className="App">
-				<Header />
-      </div>
+			<div className='App'>
+			</div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
