@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
 	Button, AppBar, Typography, Toolbar, withStyles,
-	Modal, Divider
+	Modal, Divider,AccountCircle
 } from '@material-ui/core';
 import { Login, Register } from '../../containers';
 import PropTypes from 'prop-types';
@@ -40,6 +40,9 @@ const styles = theme => ({
 		height: '60%',
 		backgroundColor: theme.palette.background.paper,
 		transform: 'translate(-50%, 40%)',
+	},
+	appbar:{
+		color:'white'
 	}
 })
 
@@ -48,7 +51,7 @@ export function Header({
 	handleModalOpen, loginOpen, registerOpen
 }) {
 	return (
-		<AppBar position='static' >
+		<AppBar position="static" className={classes.appbar}>
 			<Toolbar>
 				<Typography	
 					style={{ textDecoration: 'none' }}
@@ -62,6 +65,7 @@ export function Header({
 				<div className={classes.divide} />
 				{user ? ( 
 					<div className={classes.right_actions}>
+						{/* <Avatar></Avatar>*/}
 						<Typography
 							margin='10px'
 							className={classes.user_name}
@@ -79,7 +83,7 @@ export function Header({
 				) : (
 					<div>
 						<Button
-/* 							component={Link}
+							/*component={Link}
 							to="/login" */
 							onClick={() => handleModalOpen('login')}
 							className='login-button'
