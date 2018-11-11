@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {
-	Card, CardContent, Typography, 
-	Grid, withStyles, CardMedia,
-	CardActionArea,
+import { withStyles,
+	
 } from '@material-ui/core';
 import './App.css';
 //import LandingPage from './components/LandingPage/LandingPage';
@@ -22,8 +20,6 @@ const styles = theme => ({
 export class App extends Component {
 
   render() {
-		const { classes, user,
-			handleModalClose, handleModalOpen } = this.props;
     return (
 			<div className='App'>
 			</div>

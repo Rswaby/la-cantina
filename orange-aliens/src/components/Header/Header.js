@@ -12,7 +12,8 @@ const styles = theme => ({
 	title: {
 		'&:hover': {
 			backgroundColor: theme.palette.primary,
-			color: 'white',
+			color: 'blue',
+
 		},
 	},
 	divide: { flex: 1 },
@@ -42,8 +43,19 @@ const styles = theme => ({
 		transform: 'translate(-50%, 40%)',
 	},
 	appbar:{
-		color:'white'
-	}
+		// color:'white',
+		height:'50px'
+	},
+	// icon: {
+	// 	margin: theme.spacing.unit * 2,
+	//   },
+	//   iconHover: {
+	// 	margin: theme.spacing.unit * 2,
+	// 	'&:hover': {
+	// 	  color: red[800],
+	// 	},
+	//   },
+
 })
 
 export function Header({
@@ -51,14 +63,14 @@ export function Header({
 	handleModalOpen, loginOpen, registerOpen
 }) {
 	return (
-		<AppBar position="static" className={classes.appbar}>
+		<AppBar position="relative" color="white" className={classes.appbar}>
 			<Toolbar>
 				<Typography	
 					style={{ textDecoration: 'none' }}
 					component={Link}
-					to ="/"
+					to ="/explore"
 					className={classes.title}
-					variant='headline'
+					variant='title'
 					color='inherit'>
 					Home
 				</Typography>
@@ -83,21 +95,16 @@ export function Header({
 				) : (
 					<div>
 						<Button
-							/*component={Link}
-							to="/login" */
 							onClick={() => handleModalOpen('login')}
 							className='login-button'
 							children="Login"
 							color='inherit' />
 						<Button 
-/* 							component={Link} 
-							to="/register" */
 							onClick={() => handleModalOpen('register')}
 							className='register-button'
 							color='inherit'
 							children="Register"
 						/>
-
 						<Modal open={loginOpen} onClose={() => handleModalClose('login')}>
 							<div className={classes.loginPaper}>
 								<Login />
