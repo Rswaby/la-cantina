@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withStyles,
-	
+import {
+	withStyles,
+
 } from '@material-ui/core';
 import './App.css';
+import { EventMap } from './components/ExploreEvents/EventMap';
 //import LandingPage from './components/LandingPage/LandingPage';
 
 const styles = theme => ({
@@ -19,12 +21,12 @@ const styles = theme => ({
 
 export class App extends Component {
 
-  render() {
-    return (
+	render() {
+		return (
 			<div className='App'>
 			</div>
-    );
-  }
+		);
+	}
 }
 
 export default withStyles(styles)(App);

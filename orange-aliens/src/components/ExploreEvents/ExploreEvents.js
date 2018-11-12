@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-
-
+// import { EventCard } from './EventCard';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import {
-     Typography, Grid, withStyles, Divider, Toolbar
- } from '@material-ui/core';
+    Typography, Grid, withStyles, Divider, Toolbar
+} from '@material-ui/core';
+import { EventCard } from '../../components';
+import { EventMap } from './EventMap';
 
 const styles = theme => ({
     main_grid: {
@@ -13,8 +14,8 @@ const styles = theme => ({
     },
     item_grid: {
         "margin-top": 5,
-     },
-     date_group: {
+    },
+    date_group: {
         "top-padding": 30,
     },
     typo_margin: {
@@ -32,20 +33,51 @@ const styles = theme => ({
 });
 
 class ExploreEvents extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
 
+
+
     render() {
-        const { EventsData } = this.props;
-        console.log(EventsData);
+        const { EventsData, classes } = this.props;
+        const apiKey='AIzaSyCkHFtWKtuMS5JPO0fubUEzIy_39OtXw_M';
+        const googleurl = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&libraries=geometry,drawing,places`
+
+        const renderEventCardGrid = () => {
+            const events = EventsData.map((event) =>
+                <div className={classNames(classes.column, classes.helper)}>
+                    <Grid className={classes.item_grid} item sm={12} >
+                        <EventCard event={event} />
+                    </Grid>
+                </div>
+            );
+            return (events);
+        }
+        console.log(googleurl);
         return (
             <div>
-                <h4>ExploreEvents</h4>
+                <Grid className={classes.main_grid} container sm={12}>
+                    <Grid item sm={6}>
+                        {renderEventCardGrid()}
+                    </Grid>
+                    <Grid item justify="center" sm={6}>
+                        <Typography align="center" variant="subheading">
+                            Google Map 
+                        </Typography>
+                        <EventMap
+                            isMarkerShown
+                            googleMapURL= {googleurl}
+                            loadingElement={<div style={{ height: `100%` }} />}
+                            containerElement={<div style={{ height:`800px` }} />}
+                            mapElement={<div style={{ height: `100%` }} />}
+                        />
+                    </Grid>
+                </Grid>
             </div>
         )
     }
 }
 
-export default ExploreEvents;
+export default withStyles(styles)(ExploreEvents);

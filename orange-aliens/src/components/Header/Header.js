@@ -12,7 +12,7 @@ const styles = theme => ({
 	title: {
 		'&:hover': {
 			backgroundColor: theme.palette.primary,
-			color: 'blue',
+			color: 'white',
 
 		},
 	},
@@ -43,7 +43,7 @@ const styles = theme => ({
 		transform: 'translate(-50%, 40%)',
 	},
 	appbar:{
-		// color:'white',
+		backgroundColor:'#B8BED9',
 		height:'50px'
 	},
 	// icon: {
@@ -63,7 +63,7 @@ export function Header({
 	handleModalOpen, loginOpen, registerOpen
 }) {
 	return (
-		<AppBar position="relative" color="white" className={classes.appbar}>
+		<AppBar position="relative" color="blue" className={classes.appbar}>
 			<Toolbar>
 				<Typography	
 					style={{ textDecoration: 'none' }}
