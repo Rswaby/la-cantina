@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
-	Card, CardContent, Typography, 
-	Grid, withStyles, CardMedia,
-	CardActionArea,
+	withStyles,
+
 } from '@material-ui/core';
 import './App.css';
+import { EventMap } from './components/ExploreEvents/EventMap';
 //import LandingPage from './components/LandingPage/LandingPage';
 
 const styles = theme => ({
@@ -21,14 +21,12 @@ const styles = theme => ({
 
 export class App extends Component {
 
-  render() {
-		const { classes, user,
-			handleModalClose, handleModalOpen } = this.props;
-    return (
+	render() {
+		return (
 			<div className='App'>
 			</div>
-    );
-  }
+		);
+	}
 }
 
 export default withStyles(styles)(App);

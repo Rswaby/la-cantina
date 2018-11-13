@@ -1,3 +1,6 @@
+import React, { Component } from 'react';
+import Geocode from "react-geocode";
+
 export const getUserData = (token) => {
     return fetch("#", {
       method: "GET",
@@ -13,3 +16,19 @@ export const getUserData = (token) => {
       return error;
     });
   }
+
+export const getAddressInfo = (address) =>{
+  let addressInfo;
+  Geocode.setApiKey("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+  addressInfo = Geocode.fromAddress(address).then(
+    response => {
+      const { lat, lng } = response.results[0].geometry.location;
+      console.log(lat, lng);
+      return response;
+    },
+    error => {
+      console.error(error);
+    }
+  );
+  return addressInfo;
+}
