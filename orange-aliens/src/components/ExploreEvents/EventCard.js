@@ -44,7 +44,7 @@ class EventCard extends Component {
         return (
             <Card className={classes.card}>
                 <CardActionArea>
-                    <Grid className={classes.main_grid} container sm={12}>
+                    <Grid className={classes.main_grid} container>
                         <CardMedia
                             className={classes.cover}
                             image="https://www.gstatic.com/webp/gallery/2.jpg"

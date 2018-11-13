@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
 	Button, AppBar, Typography, Toolbar, withStyles,
-	Modal, Divider,AccountCircle
+	Modal, Divider, AccountCircle
 } from '@material-ui/core';
 import { Login, Register } from '../../containers';
 import PropTypes from 'prop-types';
@@ -42,19 +42,11 @@ const styles = theme => ({
 		backgroundColor: theme.palette.background.paper,
 		transform: 'translate(-50%, 40%)',
 	},
-	appbar:{
-		backgroundColor:'#B8BED9',
-		height:'50px'
+	appbar: {
+		backgroundColor: '#0FA2FF',
+		height: '50px'
 	},
-	// icon: {
-	// 	margin: theme.spacing.unit * 2,
-	//   },
-	//   iconHover: {
-	// 	margin: theme.spacing.unit * 2,
-	// 	'&:hover': {
-	// 	  color: red[800],
-	// 	},
-	//   },
+
 
 })
 
@@ -62,20 +54,21 @@ export function Header({
 	user, handleLogout, classes, handleModalClose,
 	handleModalOpen, loginOpen, registerOpen
 }) {
+	//this.setState({attribute:this.state.})
 	return (
-		<AppBar position="relative" color="blue" className={classes.appbar}>
+		<AppBar position="relative" className={classes.appbar}>
 			<Toolbar>
-				<Typography	
+				<Typography
 					style={{ textDecoration: 'none' }}
 					component={Link}
-					to ="/explore"
+					to="/"
 					className={classes.title}
 					variant='title'
 					color='inherit'>
 					Home
 				</Typography>
 				<div className={classes.divide} />
-				{user ? ( 
+				{user ? (
 					<div className={classes.right_actions}>
 						{/* <Avatar></Avatar>*/}
 						<Typography
@@ -85,7 +78,7 @@ export function Header({
 							color='inherit'>
 							{user.owner.first_name}
 						</Typography>
-						<Button 
+						<Button
 							className={classes.logout_button}
 							color='inherit'
 							children="logout"
@@ -93,36 +86,37 @@ export function Header({
 						/>
 					</div>
 				) : (
-					<div>
-						<Button
-							onClick={() => handleModalOpen('login')}
-							className='login-button'
-							children="Login"
-							color='inherit' />
-						<Button 
-							onClick={() => handleModalOpen('register')}
-							className='register-button'
-							color='inherit'
-							children="Register"
-						/>
-						<Modal open={loginOpen} onClose={() => handleModalClose('login')}>
-							<div className={classes.loginPaper}>
-								<Login />
-							</div>
-						</Modal>
-						<Modal open={registerOpen} onClose={() => handleModalClose('register')}>
-							<div className={classes.registerPaper}>
-								<Register handleModalClose={handleModalClose} />
-							</div>
-						</Modal>
-					</div>
-				)}
-		</Toolbar>
-	</AppBar>
+						<div>
+							<Button color="inherit" href="/explore"> Create Event </Button>
+							<Button
+								onClick={() => handleModalOpen('login')}
+								className='login-button'
+								children="Login"
+								color='inherit' />
+							<Button
+								onClick={() => handleModalOpen('register')}
+								className='register-button'
+								color='inherit'
+								children="Register"
+							/>
+							<Modal open={loginOpen} onClose={() => handleModalClose('login')}>
+								<div className={classes.loginPaper}>
+									<Login />
+								</div>
+							</Modal>
+							<Modal open={registerOpen} onClose={() => handleModalClose('register')}>
+								<div className={classes.registerPaper}>
+									<Register handleModalClose={handleModalClose} />
+								</div>
+							</Modal>
+						</div>
+					)}
+			</Toolbar>
+		</AppBar>
 	)
 }
-	
-Header.propTypes = { 
+
+Header.propTypes = {
 	user: PropTypes.object,
 	handleLogout: PropTypes.func,
 }
