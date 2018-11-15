@@ -84,7 +84,7 @@ class ExploreEvents extends Component {
                         </Typography>
                         <EventMap
                             isMarkerShown
-                            googleMapURL={developmentMap }
+                            googleMapURL={developmentMap}
                             loadingElement={<div style={{ height: `100%` }} />}
                             containerElement={<div style={{ height: `800px` }} />}
                             mapElement={<div style={{ height: `100%` }} />}
