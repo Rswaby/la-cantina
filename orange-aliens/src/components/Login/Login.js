@@ -93,7 +93,7 @@ class Login extends Component {
 						</Grid>
 						<Grid container justify="center" className={classes.dense}>
 							<Button type='submit' variant="outlined" color="primary" className={classes.button} onClick={(event) => this.handleClick(event)}>
-								Submit
+								Login
       						</Button>
 						</Grid>
 					</Grid>
