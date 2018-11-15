@@ -41,7 +41,9 @@ class headerWrapper extends Component  {
   }
 
   render() {
-    const { user } = this.context;
+    //  const { user } = this.context;
+    const user = ''
+    console.log("User",user)
     return ( 
       <Header 
       {...this.state} 

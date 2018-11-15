@@ -33,12 +33,12 @@ export class AuthProvider extends Component {
         }
         else {
 
-            // getUserData(currToken).then(result => {
-            // 	this.setState({ 
-            // 		token: currToken,
-            // 		user: result,
-            // 	})
-            // })
+                getUserData(currToken).then(result => {
+                    this.setState({ 
+                        token: currToken,
+                        user: result,
+                    })
+                })
         }
     }
 
