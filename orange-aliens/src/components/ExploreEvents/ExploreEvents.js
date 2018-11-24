@@ -59,7 +59,7 @@ class ExploreEvents extends Component {
     render() {
         const { EventsData, classes } = this.props;
         //remove production map when pushing 
-        //const googleurl = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=geometry,drawing,places`
+        // const googleurl = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=geometry,drawing,places`
         const developmentMap = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places";
         const renderEventCardGrid = () => {
             const events = EventsData.map((event, index) =>
