@@ -8,14 +8,16 @@ import {Header, ExploreEventsContainer } from './containers';
 //import Login from './components/login/login';
 //import Register from './components/register/register';
 import * as serviceWorker from './serviceWorker';
-
+const auth = "auth Props";
 
 ReactDOM.render(
 	<Router>
 		<div>
 			<Header />
-			<Route exact path="/" component={App} />
+			{/* <Route exact path="/" component={App} /> */}
+			<Route exact path="/" render={(props) => <App auth={auth} {...props} />} />
 			<Route exact path="/explore" component={ExploreEventsContainer}/>
+			
 		</div>
 	</Router>,
 	document.getElementById('root')
