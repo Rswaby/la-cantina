@@ -1,17 +1,17 @@
 
 import React, { Component } from 'react';
 
-import { CreateEvent } from '../../components';
+//import { Login } from '../../components';
 //import { AuthContext } from '../contexts/Auth.context';
 
-class CreateEventWapper extends Component {
+class CreateEvent extends Component {
   //static contextType = AuthContext;
 
   render() {
     return (
-        <CreateEvent />
+        <h4>Create Event Form</h4>
     )
   }
 }
 
-export default CreateEventWapper;
+export default CreateEvent;
