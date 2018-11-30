@@ -100,11 +100,11 @@ export function Header({
 								color='inherit'
 								children="Register"
 							/>
-							<Modal open={loginOpen} onClose={() => handleModalClose('login')}>
+							{/* <Modal open={loginOpen} onClose={() => handleModalClose('login')}>
 								<div className={classes.loginPaper}>
 									<Login />
 								</div>
-							</Modal>
+							</Modal> */}
 							<Modal open={registerOpen} onClose={() => handleModalClose('register')}>
 								<div className={classes.registerPaper}>
 									<Register handleModalClose={handleModalClose} />
