@@ -9,9 +9,9 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { Register } from '../../containers';
 
-import { newyork1, newyork4, } from '../../images';
+import { newyork3, newyork4, } from '../../images';
 
-const images = [newyork1, newyork4]
+const images = [newyork3, newyork4]
 
 const styles = theme => ({
     banner_button: {
