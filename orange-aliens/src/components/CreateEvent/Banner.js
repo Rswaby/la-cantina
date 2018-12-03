@@ -33,7 +33,7 @@ const styles = theme => ({
         top: '30%',
         left: '50%',
         transform: 'translate(-50%, 50%)',
-        color: theme.palette.primary.dark,
+        color: "white",
     },
     banner: {
         height: 400,
@@ -60,9 +60,7 @@ const Banner = (props) => (
                 alt='banner' />
         </div>
         <Typography
-            className={props.classes.banner_text}
-            variant='h3'
-            noWrap>
+            className={props.classes.banner_text} variant='h3' noWrap>
             Create Event
         </Typography>
     </div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, TextField, MenuItem } from '@material-ui/core';
+import { Grid, TextField, MenuItem, Button } from '@material-ui/core';
 import Banner from './Banner'
 const styles = theme => ({
   container: {
@@ -13,7 +13,27 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 500,
+    marginTop: theme.spacing.unit * 10,
+    width: 600,
+  },
+  textField2: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 5,
+    width: 250,
+  },
+  textField3: {
+    marginLeft: theme.spacing.unit * 11,
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 5,
+    width: 250,
+  },
+  textField4: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 10,
+    width: 600,
+    height: 200
   },
   root: {
     flexGrow: 1,
@@ -50,7 +70,8 @@ class CreateEvent extends Component {
 
   state = {
     name: 'Cat in the Hat',
-    age: '',
+    capacity: '',
+    category:'',
     multiline: 'Controlled',
     currency: 'EUR',
   };
@@ -61,6 +82,12 @@ class CreateEvent extends Component {
     });
     // event.preventDefault();
   };
+  handleClick(event){
+		console.log(this.state,this.props);
+		//this.props.history.push('#')
+		event.preventDefault();
+
+	}
 
   render() {
     const { classes } = this.props;
@@ -72,25 +99,95 @@ class CreateEvent extends Component {
         </Grid>
         <Grid container justify={"center"}>
           <form className={classes.container} noValidate autoComplete="off">
-            <Grid item sm={12}>
+            <Grid container justify="center" sm={12}>
               <TextField
                 required
                 id="standard-name"
                 label="Name"
+                rowsMax="3"
                 className={classes.textField}
                 onChange={this.handleChange('name')}
                 margin="normal"
+              // variant="filled"
               />
             </Grid>
-            <Grid item sm={12} >
+            <Grid container justify="center">
+              <TextField
+                id="category"
+                select
+                label="Category"
+                className={classes.textField2}
+                value={this.state.category}
+                onChange={this.handleChange('category')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                //variant="filled"
+                helperText="Please select a category"
+                margin="normal">
+                {currencies.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
               <TextField
                 required
-                id="standard-name"
-                label="Name"
-                className={classes.textField}
-                onChange={this.handleChange('name')}
+                id="standard-number"
+                label="Capacity"
+                value={this.state.capacity}
+                onChange={this.handleChange('Capacity')}
+                type="number"
+                className={classes.textField3}
+                InputLabelProps={{
+                  shrink: true,
+                }}
                 margin="normal"
+              //variant="filled"
               />
+            </Grid>
+
+            <Grid container justify="center">
+              <TextField
+                required
+                id="standard-textarea"
+                label="Event Address"
+                placeholder="Address"
+                multiline
+                className={classes.textField}
+                margin="normal"
+              //variant="filled"
+              />
+            </Grid>
+            <Grid container justify="center">
+              <TextField
+                id="datetime-local"
+                label="Event Date & Time"
+                type="datetime-local"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              //variant="filled"
+              />
+            </Grid>
+            <Grid container justify="center">
+              <TextField
+                id="standard-multiline-static"
+                label="Event Details"
+                multiline
+                rows="8"
+                className={classes.textField4}
+                margin="normal"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid container justify="center" className={classes.dense}>
+              <Button type='submit' variant="outlined" color="primary" className={classes.button} onClick={(event) => this.handleClick(event)}>
+                Create 
+      				</Button>
             </Grid>
           </form>
         </Grid>

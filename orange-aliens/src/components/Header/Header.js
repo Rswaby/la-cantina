@@ -63,7 +63,7 @@ export function Header({
 					component={Link}
 					to="/"
 					className={classes.title}
-					variant='title'
+					variant='button'
 					color='inherit'>
 					Home
 				</Typography>
