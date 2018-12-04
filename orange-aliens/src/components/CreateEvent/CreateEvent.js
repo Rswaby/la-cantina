@@ -46,51 +46,65 @@ const styles = theme => ({
   },
 });
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
-
 class CreateEvent extends Component {
   //static contextType = AuthContext;
 
   state = {
-    name: 'Cat in the Hat',
+    name: '',
     capacity: '',
-    category:'',
-    multiline: 'Controlled',
-    currency: 'EUR',
+    category: '',
+    address: '',
+    dateTime: '',
+    description: '',
+    longitude: '',
+    latitude: '',
+    organizer_id: 1,
+    neighborhood: 'none sent',
+    duration: 60
   };
-
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
     // event.preventDefault();
   };
-  handleClick(event){
-		console.log(this.state,this.props);
-		//this.props.history.push('#')
-		event.preventDefault();
+  handleClick(event) {
+    console.log(this.state, this.props);
+    const { address } = this.state;
+    let neighborhood, latitude, longitude;
+    if (address) {
+      this.props.getAddressInfo(address).then(response => {
+        console.log(response);
+        const { lat, lng } = response.results[0].geometry.location;
+        latitude = lat;
+        longitude = lng;
+        if (response.status === 'OK') {
+          this.setState({ longitude: lng, latitude: lat });//set long and lat
+          response.results[0].address_components.map((value) => {
+            console.log(value)
+            if (value.types[0] === 'neighborhood') {
+              neighborhood = value.long_name
+              console.log("found", neighborhood)
+              return;
+            }
+          })//end of map
+        }
+        this.setState({
+          neighborhood: neighborhood,
+          longitude: longitude,
+          latitude: latitude
+        })
 
-	}
+      })//end of promise
+    }
+    this.props.handleFinalForm(this.state)
+    event.preventDefault();
+
+  }
 
   render() {
-    const { classes } = this.props;
+    const { classes, categories } = this.props;
+    console.log("props[create event]", this.state)
 
     return (
       <Grid container className={classes.root} spacing={24}>
@@ -106,6 +120,7 @@ class CreateEvent extends Component {
                 label="Name"
                 rowsMax="3"
                 className={classes.textField}
+                value={this.state.name}
                 onChange={this.handleChange('name')}
                 margin="normal"
               // variant="filled"
@@ -127,9 +142,9 @@ class CreateEvent extends Component {
                 //variant="filled"
                 helperText="Please select a category"
                 margin="normal">
-                {currencies.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
+                {categories.map(option => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.name}
                   </MenuItem>
                 ))}
               </TextField>
@@ -138,7 +153,7 @@ class CreateEvent extends Component {
                 id="standard-number"
                 label="Capacity"
                 value={this.state.capacity}
-                onChange={this.handleChange('Capacity')}
+                onChange={this.handleChange('capacity')}
                 type="number"
                 className={classes.textField3}
                 InputLabelProps={{
@@ -155,6 +170,8 @@ class CreateEvent extends Component {
                 id="standard-textarea"
                 label="Event Address"
                 placeholder="Address"
+                value={this.state.address}
+                onChange={this.handleChange('address')}
                 multiline
                 className={classes.textField}
                 margin="normal"
@@ -166,10 +183,26 @@ class CreateEvent extends Component {
                 id="datetime-local"
                 label="Event Date & Time"
                 type="datetime-local"
-                className={classes.textField}
+                className={classes.textField2}
+                value={this.state.dateTime}
+                onChange={this.handleChange('dateTime')}
                 InputLabelProps={{
                   shrink: true,
                 }}
+              //variant="filled"
+              />
+              <TextField
+                required
+                id="standard-number"
+                label="Duration (min)"
+                value={this.state.duration}
+                onChange={this.handleChange('duration')}
+                type="number"
+                className={classes.textField3}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin="normal"
               //variant="filled"
               />
             </Grid>
@@ -179,6 +212,8 @@ class CreateEvent extends Component {
                 label="Event Details"
                 multiline
                 rows="8"
+                value={this.state.description}
+                onChange={this.handleChange('description')}
                 className={classes.textField4}
                 margin="normal"
                 variant="outlined"
@@ -186,7 +221,7 @@ class CreateEvent extends Component {
             </Grid>
             <Grid container justify="center" className={classes.dense}>
               <Button type='submit' variant="outlined" color="primary" className={classes.button} onClick={(event) => this.handleClick(event)}>
-                Create 
+                Create
       				</Button>
             </Grid>
           </form>
@@ -201,111 +236,3 @@ CreateEvent.propTypes = {
 };
 
 export default withStyles(styles)(CreateEvent);
-
-// <TextField
-//               required
-//               id="standard-name"
-//               label="Name"
-//               className={classes.textField}
-//               value={this.state.name}
-//               onChange={this.handleChange('name')}
-//               margin="normal"
-//             />
-//             <TextField
-//               id="standard-uncontrolled"
-//               label="Uncontrolled"
-//               defaultValue="foo"
-//               className={classes.textField}
-//               margin="normal"
-//             />
-//             <TextField
-//               required
-//               id="standard-required"
-//               label="Required"
-//               defaultValue="Hello World"
-//               className={classes.textField}
-//               margin="normal"
-//             />
-//             <TextField
-//               error//will be usfull to use to check form validity 
-//               id="standard-error"
-//               label="Error"
-//               defaultValue="Hello World"
-//               className={classes.textField}
-//               margin="normal"
-//             />
-//             <TextField
-//               id="standard-dense"
-//               label="Dense"
-//               className={classNames(classes.textField, classes.dense)}
-//               margin="dense"
-//             />
-//             <TextField
-//               id="standard-multiline-flexible"
-//               label="Multiline"
-//               multiline
-//               rowsMax="4"
-//               value={this.state.multiline}
-//               onChange={this.handleChange('multiline')}
-//               className={classes.textField}
-//               margin="normal"
-//             />
-//             <TextField
-//               id="standard-multiline-static"
-//               label="Multiline"
-//               multiline
-//               rows="4"
-//               defaultValue="Default Value"
-//               className={classes.textField}
-//               margin="normal"
-//             />
-
-
-//             <TextField
-//               id="standard-textarea"
-//               label="With placeholder multiline"
-//               placeholder="Placeholder"
-//               multiline
-//               className={classes.textField}
-//               margin="normal"
-//             />
-//             <TextField
-//               id="standard-number"
-//               label="Number"
-//               value={this.state.age}
-//               onChange={this.handleChange('age')}
-//               type="number"
-//               className={classes.textField}
-//               InputLabelProps={{
-//                 shrink: true,
-//               }}
-//               margin="normal"
-//             />
-//             <TextField
-//               id="standard-search"
-//               label="Search field"
-//               type="search"
-//               className={classes.textField}
-//               margin="normal"
-//             />
-//             <TextField
-//               id="n-currency"
-//               select
-//               label="Select"
-//               className={classes.textField}
-//               value={this.state.currency}
-//               onChange={this.handleChange('currency')}
-//               SelectProps={{
-//                 MenuProps: {
-//                   className: classes.menu,
-//                 },
-//               }}
-//               helperText="Please select your currency"
-//               margin="normal"
-//             >
-//               {currencies.map(option => (
-//                 <MenuItem key={option.value} value={option.value}>
-//                   {option.label}
-//                 </MenuItem>
-//               ))}
-//             </TextField>

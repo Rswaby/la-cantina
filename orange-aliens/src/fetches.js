@@ -19,7 +19,7 @@ export const getUserData = (token) => {
 
 export const getAddressInfo = (address) =>{
   let addressInfo;
-  Geocode.setApiKey("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+  Geocode.setApiKey("AIzaSyB1M5WKyFLsjE2dL1tanz1eZ_wb2Cmnvy4");
   addressInfo = Geocode.fromAddress(address).then(
     response => {
       const { lat, lng } = response.results[0].geometry.location;
@@ -32,3 +32,12 @@ export const getAddressInfo = (address) =>{
   );
   return addressInfo;
 }
+
+
+export const fetchCategories = () => fetch('/category', {
+  method: 'GET',
+}).then((response) => {
+  if (response.status !== 200) {
+    return Promise.reject({ message: 'Unable to fetch schools' });
+  } return response.json();
+}).catch(error => error);
