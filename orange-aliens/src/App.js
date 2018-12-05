@@ -23,6 +23,7 @@ const styles = theme => ({
 export class App extends Component {
 
 	render() {
+		console.log("Auth Props", this.props);
 		return (
 			<div className='App'>
 				<LandingPage />

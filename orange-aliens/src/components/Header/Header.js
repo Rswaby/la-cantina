@@ -63,7 +63,7 @@ export function Header({
 					component={Link}
 					to="/"
 					className={classes.title}
-					variant='title'
+					variant='button'
 					color='inherit'>
 					Home
 				</Typography>
@@ -87,7 +87,8 @@ export function Header({
 					</div>
 				) : (
 						<div>
-							<Button color="inherit" href="/explore"> Create Event </Button>
+							<Button color="inherit" href="/createEvent"> create event </Button>
+							<Button color="inherit" href="/explore"> Explore Events </Button>
 							<Button
 								onClick={() => handleModalOpen('login')}
 								className='login-button'
