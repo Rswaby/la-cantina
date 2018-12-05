@@ -6,7 +6,8 @@ import {
 } from '@material-ui/core';
 import './App.css';
 import { EventMap } from './components/ExploreEvents/EventMap';
-//import LandingPage from './components/LandingPage/LandingPage';
+import { LandingPage } from './containers';
+
 
 const styles = theme => ({
 	main_grid: {
@@ -25,6 +26,7 @@ export class App extends Component {
 		console.log("Auth Props", this.props);
 		return (
 			<div className='App'>
+				<LandingPage />
 			</div>
 		);
 	}
