@@ -51,15 +51,15 @@ class CreateEvent extends Component {
 
   state = {
     name: '',
-    capacity: '',
-    category: '',
+    capacity: 1,
+    category_id: '',
     address: '',
-    dateTime: '',
+    date_time: '',
     description: '',
     longitude: '',
     latitude: '',
     organizer_id: 1,
-    neighborhood: 'none sent',
+    neighborhood_id: 11,
     duration: 60
   };
   handleChange = name => event => {
@@ -69,19 +69,17 @@ class CreateEvent extends Component {
     // event.preventDefault();
   };
   handleClick(event) {
-    console.log(this.state, this.props);
+    //console.log(this.state, this.props);
     const { address } = this.state;
     let neighborhood, latitude, longitude;
     if (address) {
       this.props.getAddressInfo(address).then(response => {
         console.log(response);
         const { lat, lng } = response.results[0].geometry.location;
-        latitude = lat;
         longitude = lng;
+        latitude = lat;
         if (response.status === 'OK') {
-          this.setState({ longitude: lng, latitude: lat });//set long and lat
           response.results[0].address_components.map((value) => {
-            console.log(value)
             if (value.types[0] === 'neighborhood') {
               neighborhood = value.long_name
               console.log("found", neighborhood)
@@ -89,22 +87,25 @@ class CreateEvent extends Component {
             }
           })//end of map
         }
-        this.setState({
-          neighborhood: neighborhood,
-          longitude: longitude,
-          latitude: latitude
-        })
 
-      })//end of promise
+        console.log("lat and long", lng, lat)
+        this.props.handleFinalForm(this.state, lng, lat)
+      })
     }
-    this.props.handleFinalForm(this.state)
+
+    // this.setState({
+    //   longitude: longitude,
+    //   latitude: latitude
+    // })
+
+    console.log("before final form", this.state)
     event.preventDefault();
 
   }
 
   render() {
     const { classes, categories } = this.props;
-    console.log("props[create event]", this.state)
+    //console.log("props[create event]", this.state)
 
     return (
       <Grid container className={classes.root} spacing={24}>
@@ -132,8 +133,8 @@ class CreateEvent extends Component {
                 select
                 label="Category"
                 className={classes.textField2}
-                value={this.state.category}
-                onChange={this.handleChange('category')}
+                value={this.state.category_id}
+                onChange={this.handleChange('category_id')}
                 SelectProps={{
                   MenuProps: {
                     className: classes.menu,
@@ -180,12 +181,12 @@ class CreateEvent extends Component {
             </Grid>
             <Grid container justify="center">
               <TextField
-                id="datetime-local"
+                id="date_time-local"
                 label="Event Date & Time"
-                type="datetime-local"
+                type="dateTime-local"
                 className={classes.textField2}
-                value={this.state.dateTime}
-                onChange={this.handleChange('dateTime')}
+                value={this.state.date_time}
+                onChange={this.handleChange('date_time')}
                 InputLabelProps={{
                   shrink: true,
                 }}

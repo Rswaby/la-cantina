@@ -19,7 +19,7 @@ export const getUserData = (token) => {
 
 export const getAddressInfo = (address) =>{
   let addressInfo;
-  Geocode.setApiKey("AIzaSyB1M5WKyFLsjE2dL1tanz1eZ_wb2Cmnvy4");
+  Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
   addressInfo = Geocode.fromAddress(address).then(
     response => {
       const { lat, lng } = response.results[0].geometry.location;
@@ -41,3 +41,19 @@ export const fetchCategories = () => fetch('/category', {
     return Promise.reject({ message: 'Unable to fetch schools' });
   } return response.json();
 }).catch(error => error);
+
+
+export const createEvent = event => fetch('/event', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(event),
+  credentials: 'include',
+}).then((response) => {
+  if (response.status === 200) {
+    return response.json();
+  } if (response.status === 400) {
+    return Promise.reject({ message: 'wrong format for creating event' });
+  } return Promise.reject({ message: 'Unable to create event' });
+});

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 import { CreateEvent } from '../../components';
-import { fetchCategories, getAddressInfo } from '../../fetches';
+import { fetchCategories, getAddressInfo, createEvent } from '../../fetches';
 //import { AuthContext } from '../contexts/Auth.context';
 
 class CreateEventWapper extends Component {
@@ -26,9 +26,15 @@ class CreateEventWapper extends Component {
     console.log("component did mount")
   }
 
-  handleFinalForm(form) {
-    console.log("Final Form",form);
-    //this.props.history.push('#')
+  handleFinalForm(form,longitude,latitude) {
+    //console.log("Final Form", form);
+    //form["capacity"] = parseInt(form.capacity)
+    form["longitude"] = longitude;
+    form["latitude"] = latitude;
+    console.log("final Form", form)
+    createEvent(form).then(response=>{
+      console.log("Post Response: ",response)
+    })
 
   }
 
