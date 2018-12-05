@@ -4,9 +4,8 @@ import Search from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment'; 
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography';
+import { EventCategoriesContainer } from '../../containers';
 
 
 const styles = theme => ({
@@ -23,14 +22,17 @@ const inlineStyles = {
         width: '250px'
     },
     fieldWrapper: {
-        margin: '0px 50px 100px 50px',
+        margin: '0% 25% 5% 25%',
     },
 };
 
 class LandingPage extends React.Component {
+    constructor(props) {
+        super(props);
+    };
 
     render() {
-        const { classes } = this.props;
+        //const { classes } = this.props;
 
         return (
             <div>
@@ -56,41 +58,7 @@ class LandingPage extends React.Component {
                     </FormControl>
                 </div>
                 <div>
-                    <Typography component='p'>
-                        Explore Events By Category
-                    </Typography>
-                </div>
-                <div>
-                    <Grid container spacing={20}>
-                        <Grid item xs={3}>
-                            <Paper>
-                                <Typography component='p'>
-                                    Outdoors & Adventure
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Paper>
-                                <Typography component='p'>
-                                    Sports & Fitness
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Paper>
-                                <Typography component='p'>
-                                    Food & Drink
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Paper>
-                                <Typography component='p'>
-                                    Language & Culture
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                    </Grid>
+                    <EventCategoriesContainer />
                 </div>
             </div>
         );
