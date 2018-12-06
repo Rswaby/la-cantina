@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import {Header, ExploreEventsContainer,CreateEvent } from './containers';
+import { Header, ExploreEventsContainer, CreateEvent } from './containers';
 //import Login from './components/login/login';
 //import Register from './components/register/register';
 import * as serviceWorker from './serviceWorker';
@@ -17,6 +17,7 @@ ReactDOM.render(
 			{/* <Route exact path="/" component={App} /> */}
 			<Route exact path="/" render={(props) => <App auth={auth} {...props} />} />
 			<Route exact path="/explore" component={ExploreEventsContainer}/>
+			<Route exact path="/explore/:entityName/:entityId" component={ExploreEventsContainer} />
 			<Route exact path="/createEvent" component={CreateEvent}/>
 			
 		</div>

@@ -31,7 +31,7 @@ class EventCategoriesContainer extends React.Component {
 
     
         const categoryCards = this.state.categories.map(category => {
-            return <EventCategoryCard categoryId={category.id} categoryName={category.name} />
+            return <EventCategoryCard categoryId={category.id} categoryName={category.name} href={`/explore/category/${category.id}`} />
         });
 
         return (
