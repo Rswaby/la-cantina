@@ -32,10 +32,9 @@ class CreateEventWapper extends Component {
   }
 
   handleFinalForm(form, longitude, latitude, neighborhood) {
-    //console.log("Final Form", form);
-    //form["capacity"] = parseInt(form.capacity)
     form["longitude"] = longitude;
     form["latitude"] = latitude;
+
     fetchNeighborhoodByName(neighborhood).then(response => {
       if (response[0]) {
         form.neighborhood_id = response[0].id
@@ -44,6 +43,9 @@ class CreateEventWapper extends Component {
       }
   })
     console.log("final Form", form)
+    createEvent(form).then(response=>{
+      console.log(response)
+    })
   }
 
   getCategories() {
