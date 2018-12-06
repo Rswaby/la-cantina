@@ -60,7 +60,7 @@ class CreateEvent extends Component {
     latitude: '',
     organizer_id: 1,
     neighborhood_id: 11,
-    duration: 60
+    duration: 60,
   };
   handleChange = name => event => {
     this.setState({
@@ -71,34 +71,23 @@ class CreateEvent extends Component {
   handleClick(event) {
     //console.log(this.state, this.props);
     const { address } = this.state;
-    let neighborhood, latitude, longitude;
+    let neighborhood = "none";
     if (address) {
       this.props.getAddressInfo(address).then(response => {
         console.log(response);
         const { lat, lng } = response.results[0].geometry.location;
-        longitude = lng;
-        latitude = lat;
         if (response.status === 'OK') {
           response.results[0].address_components.map((value) => {
             if (value.types[0] === 'neighborhood') {
               neighborhood = value.long_name
               console.log("found", neighborhood)
-              return;
             }
           })//end of map
         }
 
-        console.log("lat and long", lng, lat)
-        this.props.handleFinalForm(this.state, lng, lat)
+        this.props.handleFinalForm(this.state, lng, lat, neighborhood)
       })
     }
-
-    // this.setState({
-    //   longitude: longitude,
-    //   latitude: latitude
-    // })
-
-    console.log("before final form", this.state)
     event.preventDefault();
 
   }

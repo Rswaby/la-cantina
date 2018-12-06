@@ -2,7 +2,12 @@
 import React, { Component } from 'react';
 
 import { CreateEvent } from '../../components';
-import { fetchCategories, getAddressInfo, createEvent } from '../../fetches';
+import {
+  fetchCategories,
+  getAddressInfo,
+  createEvent,
+  fetchNeighborhoodByName
+} from '../../fetches';
 //import { AuthContext } from '../contexts/Auth.context';
 
 class CreateEventWapper extends Component {
@@ -26,16 +31,19 @@ class CreateEventWapper extends Component {
     console.log("component did mount")
   }
 
-  handleFinalForm(form,longitude,latitude) {
+  handleFinalForm(form, longitude, latitude, neighborhood) {
     //console.log("Final Form", form);
     //form["capacity"] = parseInt(form.capacity)
     form["longitude"] = longitude;
     form["latitude"] = latitude;
+    fetchNeighborhoodByName(neighborhood).then(response => {
+      if (response[0]) {
+        form.neighborhood_id = response[0].id
+      } else{
+        form.neighborhood_id = 11
+      }
+  })
     console.log("final Form", form)
-    createEvent(form).then(response=>{
-      console.log("Post Response: ",response)
-    })
-
   }
 
   getCategories() {
@@ -57,7 +65,11 @@ class CreateEventWapper extends Component {
     console.log("this.props", this.state);
     const { categories } = this.state;
     return (
-      <CreateEvent categories={categories} handleFinalForm={this.handleFinalForm} getAddressInfo={getAddressInfo} />
+      <CreateEvent
+        categories={categories}
+        handleFinalForm={this.handleFinalForm}
+        getAddressInfo={getAddressInfo}
+        fetchNeighborhoodByName={fetchNeighborhoodByName} />
     )
   }
 }
