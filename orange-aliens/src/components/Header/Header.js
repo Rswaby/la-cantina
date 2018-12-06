@@ -44,7 +44,7 @@ const styles = theme => ({
 	},
 	appbar: {
 		backgroundColor: '#0FA2FF',
-		height: '50px'
+		height: '60px'
 	},
 
 
