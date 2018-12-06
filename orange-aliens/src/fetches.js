@@ -42,6 +42,16 @@ export const fetchCategories = () => fetch('/category', {
   } return response.json();
 }).catch(error => error);
 
+// http://localhost:8000/category/6/event
+
+export const fetchEventByEntityId = (entity,entityId) => fetch(`/${entity}/${entityId}/event`, {
+  method: 'GET',
+}).then((response) => {
+  if (response.status !== 200) {
+    return Promise.reject({ message: 'Unable to fetch categories' });
+  } return response.json();
+}).catch(error => error);
+
 
 export const fetchNeighborhoodByName = (name) => fetch(`/neighborhood/${name}`, {
   method: 'GET',
