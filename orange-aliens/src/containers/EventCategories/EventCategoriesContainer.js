@@ -2,28 +2,37 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { EventCategoryCard } from '../../components/';
+import { fetchCategories } from '../../fetches';
 
 
 class EventCategoriesContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            categories: []
+            categories: [],
+            categoriesFetched: false
         };
     };
 
     componentDidMount() {
-        // fetch event categories
-        fetch('/category')
-            .then(response => response.json())
-            .then(categories => this.setState({ categories: categories }));
+        const { categoriesFetched } = this.state;
+        if (!categoriesFetched) {
+            fetchCategories().then(response => {
+                this.setState({
+                    categories: response,
+                    categoriesFetched: true
+                })
+            })
+        }
     };
 
     renderCategories() {
         // render categories in 'Explore Events By Category' section
+
+    
         const categoryCards = this.state.categories.map(category => {
-                return <EventCategoryCard categoryId={category.id} categoryName={category.name} />
-            });
+            return <EventCategoryCard categoryId={category.id} categoryName={category.name} />
+        });
 
         return (
             <div>
@@ -39,14 +48,15 @@ class EventCategoriesContainer extends React.Component {
     };
 
     render() {
+        const { categories, categoriesFetched } = this.state;
         return (
             <div>
                 <div>
-                    <Typography variant='h5' align='left'>
+                    <Typography variant='title' align='left'>
                         Explore Events By Category
                     </Typography>
                 </div>
-                { this.renderCategories() }
+                {categories? this.renderCategories():<div>loading...</div>}
             </div>
         );
     };
