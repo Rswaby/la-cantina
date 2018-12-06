@@ -38,11 +38,20 @@ export const fetchCategories = () => fetch('/category', {
   method: 'GET',
 }).then((response) => {
   if (response.status !== 200) {
-    return Promise.reject({ message: 'Unable to fetch schools' });
+    return Promise.reject({ message: 'Unable to fetch categories' });
   } return response.json();
 }).catch(error => error);
 
 
+export const fetchNeighborhoodByName = (name) => fetch(`/neighborhood/${name}`, {
+  method: 'GET',
+}).then((response) => {
+  if (response.status !== 200) {
+    return Promise.reject({ message: 'Unable to fetch neighborhood by name' });
+  } return response.json();
+}).catch(error => error);
+
+// http://localhost:8000/neighborhood/Alphabet City
 export const createEvent = event => fetch('/event', {
   method: 'POST',
   headers: {
