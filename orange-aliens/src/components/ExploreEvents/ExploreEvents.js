@@ -30,6 +30,11 @@ const styles = theme => ({
         borderLeft: `2px solid ${theme.palette.divider}`,
         padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
     },
+    root: {
+        ...theme.typography.button,
+        backgroundColor: theme.palette.common.white,
+        padding: theme.spacing.unit,
+      },
 });
 
 
@@ -62,15 +67,21 @@ class ExploreEvents extends Component {
         const prod = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=geometry,drawing,places`
         const developmentMap = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places";
         const mapurl = process.env.REACT_APP_GOOGLE_MAPS_API_KEY ? prod : developmentMap;
-        
+
         const renderEventCardGrid = () => {
-            const events = EventsData.map((event, index) =>
-                <div key={index} className={classNames(classes.column, classes.helper)}>
-                    <Grid className={classes.item_grid} item sm={12} >
-                        <EventCard event={event} />
-                    </Grid>
-                </div>
-            );
+            let events;
+
+            if (EventsData.length > 0) {
+                events = EventsData.map((event, index) =>
+                    <div key={index} className={classNames(classes.column, classes.helper)}>
+                        <Grid className={classes.item_grid} item sm={12} >
+                            <EventCard event={event} />
+                        </Grid>
+                    </div>
+                );
+            } else {
+                events =  <div className={this.props.classes.root}>{"No Results for this query."}</div>
+            }
             return (events);
         }
         //console.log(googleurl);

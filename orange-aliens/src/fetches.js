@@ -42,13 +42,20 @@ export const fetchCategories = () => fetch('/category', {
   } return response.json();
 }).catch(error => error);
 
-// http://localhost:8000/category/6/event
 
 export const fetchEventByEntityId = (entity,entityId) => fetch(`/${entity}/${entityId}/event`, {
   method: 'GET',
 }).then((response) => {
   if (response.status !== 200) {
-    return Promise.reject({ message: 'Unable to fetch categories' });
+    return Promise.reject({ message: 'Unable to fetch events' });
+  } return response.json();
+}).catch(error => error);
+
+export const fetchAllEvents = () => fetch('/event', {
+  method: 'GET',
+}).then((response) => {
+  if (response.status !== 200) {
+    return Promise.reject({ message: 'Unable to fetch events' });
   } return response.json();
 }).catch(error => error);
 
@@ -61,7 +68,6 @@ export const fetchNeighborhoodByName = (name) => fetch(`/neighborhood/${name}`, 
   } return response.json();
 }).catch(error => error);
 
-// http://localhost:8000/neighborhood/Alphabet City
 export const createEvent = event => fetch('/event', {
   method: 'POST',
   headers: {
