@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
-
+import Snackbar from "@material-ui/core/Snackbar";
+import { MySnackbarContentWrapper } from './MySnackbarContent'
 import { CreateEvent } from '../../components';
 import {
   fetchCategories,
@@ -16,6 +17,7 @@ class CreateEventWapper extends Component {
     this.state = {
       categories: [],
       categoriesfetched: false,
+      open: false
     }
     this.handleFinalForm = this.handleFinalForm.bind(this)
   }
@@ -38,15 +40,28 @@ class CreateEventWapper extends Component {
     fetchNeighborhoodByName(neighborhood).then(response => {
       if (response[0]) {
         form.neighborhood_id = response[0].id
-      } else{
+      } else {
         form.neighborhood_id = 11
       }
-  })
-    console.log("final Form", form)
-    createEvent(form).then(response=>{
-      console.log(response)
+      createEvent(form).then(response => {
+        console.log("response", response)
+      })
     })
+    console.log("final Form", form)
+    this.handleClick()
   }
+
+  handleClick = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
 
   getCategories() {
     const { categoriesfetched } = this.state;
@@ -67,11 +82,29 @@ class CreateEventWapper extends Component {
     console.log("this.props", this.state);
     const { categories } = this.state;
     return (
-      <CreateEvent
-        categories={categories}
-        handleFinalForm={this.handleFinalForm}
-        getAddressInfo={getAddressInfo}
-        fetchNeighborhoodByName={fetchNeighborhoodByName} />
+      <div className="container">
+        <CreateEvent
+          categories={categories}
+          handleFinalForm={this.handleFinalForm}
+          getAddressInfo={getAddressInfo}
+          fetchNeighborhoodByName={fetchNeighborhoodByName} />
+
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleClose}
+            variant="success"
+            message="Event Created!"
+          />
+        </Snackbar>
+      </div>
     )
   }
 }
