@@ -40,30 +40,11 @@ const styles = theme => ({
 
 
 class ExploreEvents extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    Mapmarker() {
-
-        return (
-            [
-                { lat: 40.852905, lng: -73.872971 },
-                { lat: 40.7229, lng: -73.9988 },
-                { lat: 42.3917638, lng: -71.0328284 },
-                { lat: 40.754932, lng: -73.984016 },
-                { lat: 40.763186, lng: -73.994508 },
-                { lat: 40.785946, lng: -73.974187 },
-                { lat: 40.7478792, lng: -73.9756567 },
-                { lat: 40.758896, lng: -73.985130 },
-            ]
-        )
-    }
 
 
     render() {
         const { EventsData, classes } = this.props;
-        console.log("Events Data",EventsData)
+        console.log("Events Data", EventsData)
         //remove production map when pushing 
         const prod = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=geometry,drawing,places`
         const developmentMap = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places";
@@ -103,8 +84,7 @@ class ExploreEvents extends Component {
                             loadingElement={<div style={{ height: `100%` }} />}
                             containerElement={<div style={{ height: `800px` }} />}
                             mapElement={<div style={{ height: `100%` }} />}
-                            OtherProps={"Test prop"}
-                            markerCoordinates={this.Mapmarker()}
+                            EventsData={EventsData}
                         />
                     </Grid>
                 </Grid>
