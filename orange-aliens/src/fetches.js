@@ -33,7 +33,6 @@ export const getAddressInfo = (address) =>{
   return addressInfo;
 }
 
-
 export const fetchCategories = () => fetch('/category', {
   method: 'GET',
 }).then((response) => {
@@ -42,6 +41,16 @@ export const fetchCategories = () => fetch('/category', {
   } return response.json();
 }).catch(error => error);
 
+// fetch all neighborhoods
+export const fetchNeighborhoods = () =>
+  fetch('/neighborhood', { method: 'GET' })
+    .then((response) => {
+      if (response.status !== 200) {
+        return Promise.reject({ message: 'Unable to fetch neighborhoods' });
+      }
+      return response.json();
+    })
+    .catch(error => error);
 
 export const fetchNeighborhoodByName = (name) => fetch(`/neighborhood/${name}`, {
   method: 'GET',
