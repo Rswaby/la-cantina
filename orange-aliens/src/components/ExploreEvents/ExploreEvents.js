@@ -34,7 +34,7 @@ const styles = theme => ({
         ...theme.typography.button,
         backgroundColor: theme.palette.common.white,
         padding: theme.spacing.unit,
-      },
+    },
 });
 
 
@@ -63,6 +63,7 @@ class ExploreEvents extends Component {
 
     render() {
         const { EventsData, classes } = this.props;
+        console.log("Events Data",EventsData)
         //remove production map when pushing 
         const prod = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=geometry,drawing,places`
         const developmentMap = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places";
@@ -71,7 +72,7 @@ class ExploreEvents extends Component {
         const renderEventCardGrid = () => {
             let events;
 
-            if (EventsData.length > 0) {
+            if (EventsData.length) {
                 events = EventsData.map((event, index) =>
                     <div key={index} className={classNames(classes.column, classes.helper)}>
                         <Grid className={classes.item_grid} item sm={12} >
@@ -80,8 +81,9 @@ class ExploreEvents extends Component {
                     </div>
                 );
             } else {
-                events =  <div className={this.props.classes.root}>{"No Results for this query."}</div>
+                events = <div className={this.props.classes.root}>{"No Results for this query."}</div>
             }
+            //console.log("events", events)
             return (events);
         }
         //console.log(googleurl);

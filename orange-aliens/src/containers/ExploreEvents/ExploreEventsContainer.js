@@ -18,7 +18,7 @@ export default class ExploreEventsContainer extends Component {
         if (params && params.entityName && params.entityId) {
             fetchEventByEntityId(params.entityName, params.entityId).then(response => {
                 this.setState({
-                    EventsData: response,
+                    EventsData: response.events,
                     DidFetch: true
                 })
                 console.log(response)
