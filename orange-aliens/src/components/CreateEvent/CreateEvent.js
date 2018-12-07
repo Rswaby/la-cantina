@@ -66,7 +66,7 @@ class CreateEvent extends Component {
     this.setState({
       [name]: event.target.value,
     });
-    // event.preventDefault();
+    //event.preventDefault();
   };
   handleClick(event) {
     //console.log(this.state, this.props);

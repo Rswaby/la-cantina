@@ -83,7 +83,7 @@ class ExploreEvents extends Component {
                             googleMapURL={mapurl}
                             loadingElement={<div style={{ height: `100%` }} />}
                             containerElement={<div style={{ height: `800px` }} />}
-                            mapElement={<div style={{ height: `100%` }} />}
+                            mapElement={<div style={{ height: `${EventsData.length > 11 ? 340 : 100}%` }} />}
                             EventsData={EventsData}
                         />
                     </Grid>
