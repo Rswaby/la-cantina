@@ -6,3 +6,4 @@ export { default as EventCard } from './ExploreEvents/EventCard';
 export {default as CreateEvent } from './CreateEvent/CreateEvent';
 export { default as LandingPage } from './LandingPage/LandingPage';
 export { default as EventCategoryCard } from './EventCategories/EventCategoryCard';
+export { default as SearchBar } from './SearchBar/SearchBar';
