@@ -20,6 +20,7 @@ ReactDOM.render(
       <Route exact path="/" render={props => <App auth={auth} {...props} />} />
       <Route exact path="/explore" component={ExploreEventsContainer} />
       <Route exact path="/createEvent" component={CreateEvent} />
+      <Route exact path="/explore/:entityName/:entityId" component={ExploreEventsContainer} />
       <Route exact path="/event/:eventid" component={EventDescrip} />
     </div>
   </Router>,

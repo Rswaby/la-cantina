@@ -29,45 +29,39 @@ const styles = theme => ({
     borderLeft: `2px solid ${theme.palette.divider}`,
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
   },
+  root: {
+    ...theme.typography.button,
+    backgroundColor: theme.palette.common.white,
+    padding: theme.spacing.unit,
+  },
 })
 
 class ExploreEvents extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  Mapmarker() {
-    return [
-      {lat: 40.852905, lng: -73.872971},
-      {lat: 40.7229, lng: -73.9988},
-      {lat: 42.3917638, lng: -71.0328284},
-      {lat: 40.754932, lng: -73.984016},
-      {lat: 40.763186, lng: -73.994508},
-      {lat: 40.785946, lng: -73.974187},
-      {lat: 40.7478792, lng: -73.9756567},
-      {lat: 40.758896, lng: -73.98513},
-    ]
-  }
-
   render() {
     const {EventsData, classes} = this.props
+    console.log('Events Data', EventsData)
     //remove production map when pushing
-    //const the_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const prod = `https://maps.googleapis.com/maps/api/js?key=${
       process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     }&libraries=geometry,drawing,places`
     const developmentMap = 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
     const mapurl = process.env.REACT_APP_GOOGLE_MAPS_API_KEY ? prod : developmentMap
 
-    // dynamically rendering each event item
     const renderEventCardGrid = () => {
-      const events = EventsData.map((event, index) => (
-        <div key={index} className={classNames(classes.column, classes.helper)}>
-          <Grid className={classes.item_grid} item sm={12}>
-            <EventCard event={event} />
-          </Grid>
-        </div>
-      ))
+      let events
+
+      if (EventsData.length) {
+        events = EventsData.map((event, index) => (
+          <div key={index} className={classNames(classes.column, classes.helper)}>
+            <Grid className={classes.item_grid} item sm={12}>
+              <EventCard event={event} />
+            </Grid>
+          </div>
+        ))
+      } else {
+        events = <div className={this.props.classes.root}>{'No Results for this query.'}</div>
+      }
+      //console.log("events", events)
       return events
     }
     //console.log(googleurl);
@@ -86,9 +80,8 @@ class ExploreEvents extends Component {
               googleMapURL={mapurl}
               loadingElement={<div style={{height: `100%`}} />}
               containerElement={<div style={{height: `800px`}} />}
-              mapElement={<div style={{height: `100%`}} />}
-              OtherProps={'Test prop'}
-              markerCoordinates={this.Mapmarker()}
+              mapElement={<div style={{height: `${EventsData.length > 11 ? 340 : 100}%`}} />}
+              EventsData={EventsData}
             />
           </Grid>
         </Grid>

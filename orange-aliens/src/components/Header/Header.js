@@ -41,7 +41,7 @@ const styles = theme => ({
   },
   appbar: {
     backgroundColor: '#0FA2FF',
-    height: '50px',
+    height: '60px',
   },
 })
 
@@ -55,7 +55,7 @@ export function Header({user, handleLogout, classes, handleModalClose, handleMod
           component={Link}
           to="/"
           className={classes.title}
-          variant="title"
+          variant="button"
           color="inherit">
           Home
         </Typography>

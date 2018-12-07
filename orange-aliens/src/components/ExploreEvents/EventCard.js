@@ -42,9 +42,6 @@ const styles = {
   },
 }
 class EventCard extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     const {classes, event} = this.props
     //const bull = <span className={classes.bullet}>•</span>;
@@ -68,11 +65,11 @@ class EventCard extends Component {
             <Grid item sm={3}>
               <CardContent>
                 <Typography className={classes.pos} color="textSecondary">
-                  {moment(event.time).format('hh:mm a')}
+                  {/* {moment(event.time).format("hh:mm a")} */}
                 </Typography>
                 <Divider />
                 <Typography className={classes.pos} color="textSecondary">
-                  {'event.location'}
+                  {event.address}
                 </Typography>
               </CardContent>
             </Grid>
