@@ -5,6 +5,15 @@ import { EventCategoryCard } from '../../components/';
 import { fetchCategories } from '../../fetches';
 
 
+const inlineStyles = {
+    header: {
+        margin: '0 15% 2% 15%',
+    },
+    categories: {
+        margin: '0 15% 1% 15%',
+    },
+};
+
 class EventCategoriesContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -28,18 +37,16 @@ class EventCategoriesContainer extends React.Component {
 
     renderCategories() {
         // render categories in 'Explore Events By Category' section
-
-    
         const categoryCards = this.state.categories.map(category => {
             return <EventCategoryCard categoryId={category.id} categoryName={category.name} href={`/explore/category/${category.id}`} />
         });
 
         return (
-            <div>
-                <Grid container justify="center" spacing={16}>
+            <div style={inlineStyles.categories}>
+                <Grid container alingContent={'stretch'} spacing={40}>
                     {
                         categoryCards.map(category => {
-                            return <Grid item xs={12} sm={6} md={4} lg={3}>{category}</Grid>;
+                            return <Grid item sm={6} md={4} lg={3}>{category}</Grid>;
                         })
                     }
                 </Grid>
@@ -51,7 +58,7 @@ class EventCategoriesContainer extends React.Component {
         const { categories, categoriesFetched } = this.state;
         return (
             <div>
-                <div>
+                <div style={inlineStyles.header}>
                     <Typography variant='title' align='left'>
                         Explore Events By Category
                     </Typography>

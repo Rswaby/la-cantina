@@ -68,6 +68,17 @@ export const fetchCategories = () =>
     })
     .catch(error => error)
 
+// fetch all neighborhoods
+export const fetchNeighborhoods = () =>
+  fetch('/neighborhood', { method: 'GET' })
+    .then((response) => {
+      if (response.status !== 200) {
+        return Promise.reject({ message: 'Unable to fetch neighborhoods' });
+      }
+      return response.json();
+    })
+    .catch(error => error);
+
 export const fetchEventByEntityId = (entity, entityId) =>
   fetch(`/${entity}/${entityId}/event`, {
     method: 'GET',
