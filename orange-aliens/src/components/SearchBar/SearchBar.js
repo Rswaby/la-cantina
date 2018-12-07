@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import { fetchNeighborhoods } from '../../fetches';
-//import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -47,7 +47,9 @@ class SearchBar extends React.Component {
             neighborhoods: [],
             neighborhoodsFetched: false,
             suggestedNeighborhoods: [],
-            single: ''
+            single: '',
+            isRedirected: false,
+            neighborhoodId: ''
         };
     };
 
@@ -150,8 +152,10 @@ class SearchBar extends React.Component {
     };
 
     onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-        console.log('selected suggestion', suggestionValue, suggestion);
-        //return(<Redirect to='/explore' />);
+        this.setState({
+            isRedirected: true, 
+            neighborhoodId: suggestion.id,
+        });
     };
 
     handleChange = name => (event, { newValue }) => {
@@ -159,6 +163,10 @@ class SearchBar extends React.Component {
     };
 
     render() {
+        if (this.state.isRedirected) {
+            return <Redirect to={`/explore/neighborhood/${this.state.neighborhoodId}`} />;
+        };
+
         const { classes } = this.props;
         const autosuggestProps = {
             renderInputComponent: this.renderInputComponent,
