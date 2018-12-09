@@ -1,15 +1,34 @@
 /** @format */
 
-import React, {Component} from 'react'
-import Calendar from 'react-calendar'
-import PropTypes from 'prop-types'
-import {withStyles} from '@material-ui/core'
-import moment from 'moment'
-import {Button, Grid, Paper, Card, CardActionArea, CardContent, CardMedia, Typography} from '@material-ui/core'
+import React, {Component} from 'react';
+import Calendar from 'react-calendar';
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core';
+import moment from 'moment';
+import {AccountCircle} from '@material-ui/icons';
+import EventCarousel from '../Carousel/Carousel';
+import {
+  Button,
+  Grid,
+  GridList,
+  GridListTile,
+  GridListTileBar,
+  ListSubheader,
+  Paper,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@material-ui/core';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
+  },
+  gridList: {
+    width: 500,
+    height: 450,
   },
   paper: {
     padding: theme.spacing.unit,
@@ -18,11 +37,11 @@ const styles = theme => ({
   bodySection: {
     backgroundColor: '#F6F7F8',
   },
-})
+});
 
 class EventDescription extends Component {
   render() {
-    const {address, attending, capacity, classes, date_time, description, name, organizer} = this.props
+    const {address, attending, capacity, classes, date_time, description, name, organizer} = this.props;
 
     return (
       <div className={classes.root}>
@@ -60,12 +79,21 @@ class EventDescription extends Component {
                   <Typography variant="h6" align="center" gutterBottom>
                     Come through! {capacity ? `Capacity: ${capacity}` : 0}
                   </Typography>
-
                   <p>
                     <Button variant="contained" color="primary">
                       Link Up
                     </Button>
                   </p>
+                </Grid>
+              </Grid>
+              {/* Photos Section */}
+              <Grid item lg={8} md={12} xs={12} className={classes.bodySection}>
+                <EventCarousel />
+              </Grid>
+              {/* Map and Calender Section */}
+              <Grid item lg={4} md={6} xs={12} className={classes.bodySection}>
+                <Grid item alignItems="center" justify="center" className={classes.body}>
+                  <Calendar value={date_time} style={{marginRight: '30px'}} />
                 </Grid>
               </Grid>
               {/* Description Section */}
@@ -80,41 +108,21 @@ class EventDescription extends Component {
                   </Grid>
                 </Grid>
               </Grid>
-              {/* Map and Calender Section */}
-              <Grid item lg={4} md={6} xs={12} className={classes.bodySection}>
-                <Grid item alignItems="center" justify="center" className={classes.body}>
-                  <Calendar value={date_time} style={{marginRight: '30px'}} />
-                </Grid>
-              </Grid>
-              {/* Photos Section */}
-              <Grid item lg={6} xs={12} className={classes.bodySection}>
-                <Paper className={classes.paper}> Photos Section </Paper>
-              </Grid>
               {/* Attendees */}
-              <Grid item lg={6} xs={12} className={classes.bodySection}>
-                {/* <Paper className={classes.paper}> */}
-                {attending
-                  ? attending.map(attendee => (
-                      <Grid item>
-                        <Card key={attendee.id} sm={6} xs={6}>
-                          <CardActionArea image="">
-                            <CardMedia
-                              image={require('../../images/baseline-person-24px.svg')}
-                              title="account placeholder"
-                            />
-                            <CardContent>
-                              <Typography gutterBottom variant="h5" component="h2">
-                                <p>
-                                  {attendee.first_name} {attendee.last_name}
-                                </p>
-                              </Typography>
-                            </CardContent>
-                          </CardActionArea>
-                        </Card>
-                      </Grid>
-                    ))
-                  : null}
-                {/* </Paper> */}
+              <Grid item lg={4} md={12} xs={12} className={classes.bodySection}>
+                <GridList cellHeight={180} className={classes.gridList}>
+                  <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
+                    <ListSubheader component="div">Attendees</ListSubheader>
+                  </GridListTile>
+                  {attending
+                    ? attending.map(attendee => (
+                        <GridListTile style={{MarginLeft: 'auto', marginRight: 'auto', width: '50%'}}>
+                          <AccountCircle style={{fontSize: 150}} />
+                          <GridListTileBar title={attendee.first_name} />
+                        </GridListTile>
+                      ))
+                    : null}
+                </GridList>
               </Grid>
               {/* Comments Section */}
               <Grid item lg={12} xs={12} className={classes.bodySection}>
@@ -124,12 +132,12 @@ class EventDescription extends Component {
           </Grid>
         </Grid>
       </div>
-    )
+    );
   }
 }
 
 EventDescription.propTypes = {
   classes: PropTypes.object.isRequired,
-}
+};
 
-export default withStyles(styles)(EventDescription)
+export default withStyles(styles)(EventDescription);
