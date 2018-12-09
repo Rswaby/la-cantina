@@ -1,10 +1,10 @@
 /** @format */
 
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {Button, AppBar, Typography, Toolbar, withStyles, Modal, Divider, AccountCircle} from '@material-ui/core'
-import {Login, Register} from '../../containers'
-import PropTypes from 'prop-types'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {Button, AppBar, Typography, Toolbar, withStyles, Modal, Divider, AccountCircle} from '@material-ui/core';
+import {Login, Register} from '../../containers';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
   title: {
@@ -43,7 +43,7 @@ const styles = theme => ({
     backgroundColor: '#0FA2FF',
     height: '60px',
   },
-})
+});
 
 export function Header({user, handleLogout, classes, handleModalClose, handleModalOpen, loginOpen, registerOpen}) {
   //this.setState({attribute:this.state.})
@@ -109,17 +109,17 @@ export function Header({user, handleLogout, classes, handleModalClose, handleMod
         )}
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
 Header.propTypes = {
   user: PropTypes.object,
   handleLogout: PropTypes.func,
-}
+};
 
 Header.defaultProps = {
   user: null,
   handleLogout: undefined,
-}
+};
 
-export default withStyles(styles)(Header)
+export default withStyles(styles)(Header);
