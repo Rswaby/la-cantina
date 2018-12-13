@@ -60,7 +60,7 @@ The la-cantina team
 | Norbu Tsering | https://github.com/ |
 
 
-
+The Backend For this project: https://github.com/alvarezpj/ctp_project_backend
 License
 ----
 MIT
