@@ -15,7 +15,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 const styles = theme => ({
     root: {
-        height: 250,
+        height: 75,
         flexGrow: 1,
     },
     container: {

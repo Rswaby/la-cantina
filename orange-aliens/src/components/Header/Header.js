@@ -40,7 +40,7 @@ const styles = theme => ({
     transform: 'translate(-50%, 40%)',
   },
   appbar: {
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#003CFF',
     height: '60px',
   },
 });
