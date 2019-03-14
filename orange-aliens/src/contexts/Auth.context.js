@@ -23,6 +23,13 @@ export class AuthProvider extends Component {
         })
     }
 
+    saveUserData(AuthToken, token){
+        localStorage.setItem(AuthToken,token);
+        this.state({
+            token:token
+        })
+    }
+
     componentDidMount() {
         // this.setState(this.initialState());
         const currToken = localStorage.getItem("token");

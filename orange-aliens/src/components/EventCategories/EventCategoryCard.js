@@ -16,7 +16,7 @@ const colors = [
 
 const styles = {
     root: {
-        background: '#003CFF',
+        background: 'teal',
         height: 130,
         color: '#FFFFFF',
     }
