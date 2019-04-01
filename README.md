@@ -57,7 +57,6 @@ The la-cantina team
 | Lenny Gonzalez | https://github.com/LennyGonz |
 | Rohan Swaby | https://github.com/Rswaby |
 | Victor Alvarez Pajaro | https://github.com/alvarezpj |
-| Norbu Tsering | https://github.com/ |
 
 
 The Backend For this project: https://github.com/alvarezpj/ctp_project_backend
