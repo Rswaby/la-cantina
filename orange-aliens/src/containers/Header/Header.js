@@ -1,10 +1,7 @@
-/** @format */
-
-import React, {Component} from 'react'
-
-import {Header} from '../../components'
-import {AuthContext} from '../../contexts/Auth.context'
-
+import React, { Component } from 'react'
+import { Header } from '../../components'
+import { AuthContext } from '../../contexts/Auth.context'
+import { AUTH_TOKEN } from '../../constants';
 class headerWrapper extends Component {
   static contextType = AuthContext
 
@@ -21,38 +18,30 @@ class headerWrapper extends Component {
 
   handleClose(modal) {
     if (modal === 'login') {
-      this.setState({loginOpen: false})
+      this.setState({ loginOpen: false })
     } else if (modal === 'register') {
-      this.setState({registerOpen: false})
+      this.setState({ registerOpen: false })
     }
   }
 
   handleOpen(modal) {
     if (modal === 'login') {
-      this.setState({loginOpen: true})
+      this.setState({ loginOpen: true })
     } else if (modal === 'register') {
-      this.setState({registerOpen: true})
+      this.setState({ registerOpen: true })
     }
   }
 
   handleLogout() {
     //this.context.onLogout();
-    alert('Logout')
-    this.handleClose('login')
+    localStorage.removeItem(AUTH_TOKEN)
+    console.log(History)
   }
 
   render() {
-    //  const { user } = this.context;
-    const user = ''
-    console.log('User', user)
+
     return (
-      <Header
-        {...this.state}
-        user={user}
-        handleModalClose={this.handleClose}
-        handleModalOpen={this.handleOpen}
-        handleLogout={this.handleLogout}
-      />
+      <Header handleLogout={this.handleLogout} />
     )
   }
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { TextField, Grid, Typography, withStyles, AppBar, Button } from "@material-ui/core";
+import { AUTH_TOKEN, LOGIN_MUTATION } from "../../constants";
+import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
 
-// more components at https://material-ui.com/getting-started/usage/
 const styles = theme => ({
 	container: {
 		display: "flex",
@@ -25,14 +26,22 @@ const styles = theme => ({
 		height: '50px'
 	},
 	button: {
-		margin: theme.spacing.unit,
+		margin: theme.spacing.unit * 2,
 	},
 });
+const SIGNUP_MUTATION = gql`
+  mutation SignupMutation($email: String!, $password: String!, $name: String!) {
+    signup(email: $email, password: $password, name: $name) {
+      token
+    }
+  }
+`
 class Register extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
+			login: true,
 			email: "",
 			firstname: "",
 			lastname: "",
@@ -50,12 +59,29 @@ class Register extends Component {
 	handleSubmit(event) {
 		console.log(this.state, this.props);
 		//this.props.history.push('#')
+  		//"proxy": "http://localhost:8000"
 		event.preventDefault();
 
 	}
 
+	_confirm = async data => {
+		console.log("Confirmed")
+		const { token } = this.state.login ? data.login : data.signup
+		this._saveUserData(token)
+		//this.props.history.push('/')
+	}
+
+
+	_saveUserData = token => {
+		localStorage.setItem(AUTH_TOKEN, token);
+	}
+
+
 	render() {
-		const {classes} = this.props;
+		const { classes } = this.props;
+		const { login, firstname, lastname, password, email } = this.state;
+		const name = firstname + ' ' + lastname;
+		//console.log(name,password,email)
 		return (
 			<div>
 				<AppBar position="relative" className={classes.appbar}>
@@ -64,14 +90,14 @@ class Register extends Component {
 							className={classes.dense}
 							variant='title'
 							color='inherit'>
-							Register
-					</Typography>
+							{login ? 'Login' : 'Register'}
+						</Typography>
 					</Grid>
 				</AppBar>
 				<form className={classes.container}>
 					<Grid justify="center" container className={classes.dense}>
 						<Grid container justify="center">
-							<TextField
+							{!login && (<TextField
 								id="outlined-firstname-input"
 								label="First Name"
 								className={classes.textField}
@@ -81,9 +107,8 @@ class Register extends Component {
 								margin="normal"
 								variant="outlined"
 								onChange={this.handleChange('firstname')}
-							/>
-
-							<TextField
+							/>)}
+							{!login && (<TextField
 								id="outlined-lastname-input"
 								label="Last Name"
 								className={classes.textField}
@@ -93,7 +118,7 @@ class Register extends Component {
 								margin="normal"
 								variant="outlined"
 								onChange={this.handleChange('lastname')}
-							/>
+							/>)}
 						</Grid>
 						<Grid container justify="center" className={classes.dense}>
 							<TextField
@@ -108,7 +133,6 @@ class Register extends Component {
 								onChange={this.handleChange('email')}
 							/>
 						</Grid>
-
 						<Grid container justify="center" className={classes.dense}>
 							<TextField
 								id="outlined-password-input"
@@ -122,18 +146,35 @@ class Register extends Component {
 							/>
 						</Grid>
 						<Grid container justify="center" className={classes.dense}>
-							<Button type='submit' variant="outlined" color="primary" className={classes.button} onClick={(event) => this.handleClick(event)}>
-								Register
+							<Grid item xs={3}>
+								<Mutation
+									mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
+									variables={{ email, password, name }}
+									onCompleted={data => console.log("Data",data)}>
+									{mutation => (
+										<Button className={classes.button} type='submit' variant="outlined" color="primary"
+											onClick={mutation}>
+											{login ? 'Login' : 'Register'}
+										</Button>
+									)}
+								</Mutation>
+							</Grid>
+							<Grid item xs={3}>
+								<Button
+									className={classes.button}
+									variant="outlined"
+									color="primary"
+									onClick={() => this.setState({ login: !login })}>
+									{login ? 'create an account' : 'already have an account?'}
 								</Button>
+							</Grid>
 						</Grid>
 					</Grid>
-
 				</form>
 			</div>
-		);
+		)
 	}
 }
-
 Register.propTypes = {
 	classes: PropTypes.object.isRequired
 };
