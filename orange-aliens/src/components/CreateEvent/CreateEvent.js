@@ -1,11 +1,9 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, TextField, MenuItem, Button } from '@material-ui/core';
 import { styles } from './CreateEvent.styles'
-import Banner from './Banner'
 
 class CreateEvent extends Component {
   state = {

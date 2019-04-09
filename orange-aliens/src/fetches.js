@@ -37,6 +37,10 @@ export const getAddressInfo = address => {
   return addressInfo
 }
 
+export const getUpcommingEvents = query =>{
+  //url = https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public&page=20&text=Harlem,free
+}
+
 export const getEvents = eventId => {
   return fetch(`/event/${eventId}`, {
     method: 'GET',
