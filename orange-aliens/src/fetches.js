@@ -37,7 +37,8 @@ export const getAddressInfo = address => {
   return addressInfo
 }
 
-export const getUpcommingEvents = query =>{
+export const getUpcommingEvents = (keywords,limit) =>{
+  const apiKey = process.env.REACT_APP_MEEPUP_API_KEY
   //url = https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public&page=20&text=Harlem,free
 }
 
