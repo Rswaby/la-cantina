@@ -37,9 +37,25 @@ export const getAddressInfo = address => {
   return addressInfo
 }
 
-export const getUpcommingEvents = (keywords,limit) =>{
-  const apiKey = process.env.REACT_APP_MEEPUP_API_KEY
-  //url = https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public&page=20&text=Harlem,free
+export  const getUpcommingEvents = async (keywords,limit)=>{
+  console.log("inside Async")
+  const params = {
+    keywords:keywords,
+    limit:limit,
+  }
+  
+  const response = await fetch('/meetup',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(params),
+    credentials: 'include',
+  })
+
+  const data = await response.json()
+
+  return data
 }
 
 export const getEvents = eventId => {
