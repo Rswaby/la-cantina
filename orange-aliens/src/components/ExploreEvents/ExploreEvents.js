@@ -1,52 +1,23 @@
-/** @format */
 
-import React, {Component} from 'react'
-// import { EventCard } from './EventCard';
+import React, { Component } from 'react'
 import classNames from 'classnames'
-import {Link} from 'react-router-dom'
-import {Typography, Grid, withStyles, Divider, Toolbar} from '@material-ui/core'
-import {EventCard} from '../../components'
-import {EventMap} from './EventMap'
-
-const styles = theme => ({
-  main_grid: {
-    'margin-top': 20,
-  },
-  item_grid: {
-    'margin-top': 5,
-  },
-  date_group: {
-    'top-padding': 30,
-  },
-  typo_margin: {},
-  media: {
-    height: 90,
-  },
-  column: {
-    flexBasis: '33.33%',
-  },
-  helper: {
-    borderLeft: `2px solid ${theme.palette.divider}`,
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-  },
-  root: {
-    ...theme.typography.button,
-    backgroundColor: theme.palette.common.white,
-    padding: theme.spacing.unit,
-  },
-})
+import { Link } from 'react-router-dom'
+import { Typography, Grid, withStyles, Hidden, List } from '@material-ui/core'
+import { EventCard, EventMapBox } from '../../components'
+import { EventMap } from './EventMap'
+import { styles } from './ExploreEvents.styles';
 
 class ExploreEvents extends Component {
+
   render() {
-    const {EventsData, classes} = this.props
-    console.log('Events Data', EventsData)
-    //remove production map when pushing
+    const { EventsData, classes, meetupEvents, Fetched } = this.props
+    console.log("From Meetup Api: ", meetupEvents)
     const prod = `https://maps.googleapis.com/maps/api/js?key=${
       process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-    }&libraries=geometry,drawing,places`
+      }&libraries=geometry,drawing,places`
     const developmentMap = 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
-    const mapurl = process.env.REACT_APP_GOOGLE_MAPS_API_KEY ? prod : developmentMap
-
+    //const mapurl = process.env.REACT_APP_GOOGLE_MAPS_API_KEY ? prod : developmentMap
+    const mapurl = developmentMap
     const renderEventCardGrid = () => {
       let events
 
@@ -61,29 +32,42 @@ class ExploreEvents extends Component {
       } else {
         events = <div className={this.props.classes.root}>{'No Results for this query.'}</div>
       }
-      //console.log("events", events)
       return events
     }
-    //console.log(googleurl);
+
+    const renderMeetupEvents = () => {
+      console.log("meetUp", meetupEvents)
+      let events
+      if (Fetched && meetupEvents.events.length) {
+        events = meetupEvents.events.map((event, index) => (
+          <Grid className={classes.item_grid} container>
+            {/*<EventCard/>*/}
+            {event.name}
+          </Grid>
+        ))
+      }
+      return events
+
+    }
+
+
     return (
       <div>
         <Grid className={classes.main_grid} container>
-          <Grid item sm={6}>
+          <Grid item sm={12} md={6} xs={12} lg={6}>
+            {renderMeetupEvents()}
             {renderEventCardGrid()}
           </Grid>
-          <Grid item sm={6}>
-            <Typography align="center" variant="subheading">
-              Google Map
-            </Typography>
-            <EventMap
-              isMarkerShown
-              googleMapURL={mapurl}
-              loadingElement={<div style={{height: `100%`}} />}
-              containerElement={<div style={{height: `800px`}} />}
-              mapElement={<div style={{height: `${EventsData.length > 11 ? 340 : 100}%`}} />}
-              EventsData={EventsData}
-            />
-          </Grid>
+          <Hidden smDown xsDown mdDown>
+            <Grid item sm={12} md={6} xs={12} lg={6} >
+              <div style={{ position: "fixed" }}>
+                <Typography align="center" variant="subheading">
+                  New York
+              </Typography>
+                <EventMapBox width={800} height={600} />
+              </div>
+            </Grid>
+          </Hidden>
         </Grid>
       </div>
     )
@@ -91,3 +75,11 @@ class ExploreEvents extends Component {
 }
 
 export default withStyles(styles)(ExploreEvents)
+// <EventMap
+//                 isMarkerShown
+//                 googleMapURL={mapurl}
+//                 loadingElement={<div style={{ height: `100%` }} />}
+//                 containerElement={<div style={{ height: `800px` }} />}
+//                 mapElement={<div style={{ height: `${EventsData.length > 11 ? 340 : 100}%` }} />}
+//                 EventsData={EventsData}
+//               />

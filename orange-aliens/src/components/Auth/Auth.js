@@ -35,7 +35,7 @@ class Auth extends Component {
         const { login, password, name, email } = this.state;
 
         return (
-            <div className='login-form'>
+            <div className='login-form' style={{marginTop:'70px'}}>
                 <style>{`
                     body > div,
                     body > div > div,

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { Auth } from "../src/components";
 import { Header, ExploreEventsContainer, CreateEvent } from './containers';
 import * as serviceWorker from './serviceWorker';
@@ -62,12 +63,14 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <div>
         <Header />
-        <Route exact path="/" render={props => <App auth={""} {...props} />} />
-        <Route exact path="/auth" component={Auth}/>
-        <Route exact path="/explore" component={ExploreEventsContainer} />
-        <Route exact path="/createEvent" component={CreateEvent} />
-        <Route exact path="/explore/:entityName/:entityId" component={ExploreEventsContainer} />
-        <Route exact path="/event/:eventid" component={EventDescrip} />
+        <div style={{ marginTop: '70px' }}>
+          <Route exact path="/" render={props => <App auth={""} {...props} />} />
+          <Route exact path="/auth" component={Auth} />
+          <Route exact path="/explore" component={ExploreEventsContainer} />
+          <Route exact path="/createEvent" component={CreateEvent} />
+          <Route exact path="/explore/:entityName/:entityId" component={ExploreEventsContainer} />
+          <Route exact path="/event/:eventid" component={EventDescrip} />
+        </div>
       </div>
     </ApolloProvider>
   </Router>,

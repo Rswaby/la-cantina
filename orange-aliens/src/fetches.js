@@ -37,6 +37,27 @@ export const getAddressInfo = address => {
   return addressInfo
 }
 
+export  const getUpcommingEvents = async (keywords,limit)=>{
+  console.log("inside Async")
+  const params = {
+    keywords:keywords,
+    limit:limit,
+  }
+  
+  const response = await fetch('/meetup',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(params),
+    credentials: 'include',
+  })
+
+  const data = await response.json()
+
+  return data
+}
+
 export const getEvents = eventId => {
   return fetch(`/event/${eventId}`, {
     method: 'GET',
