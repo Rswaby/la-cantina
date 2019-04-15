@@ -8,7 +8,8 @@ export default class ExploreEventsContainer extends Component {
         this.state = {
             EventsData: [],
             MeetupEvents:[],
-            DidFetch: false
+            DidFetch: false,
+            MeetupFetch:false
 
         }
     }
@@ -21,13 +22,14 @@ export default class ExploreEventsContainer extends Component {
                     EventsData: response.events,
                     DidFetch: true
                 })
-                console.log(response)
+                
             })
              //CALL TO BACKEND MEETUP API
-             getUpcommingEvents("free",20)
+             getUpcommingEvents("free",30)
              .then(data => {
                  this.setState({
                      MeetupEvents:data.response,
+                     MeetupFetch:true
                  })
              })
         } else if (this.props.match.path === "/explore") {
@@ -36,6 +38,7 @@ export default class ExploreEventsContainer extends Component {
                 .then(data => {
                     this.setState({
                         MeetupEvents:data.response,
+                        MeetupFetch:true
                     })
                 })
 
@@ -48,11 +51,10 @@ export default class ExploreEventsContainer extends Component {
         }
     }
     render() {
-        console.log(this.state)
-        const { DidFetch, EventsData, MeetupEvents } = this.state;
+        const { DidFetch, EventsData, MeetupEvents, MeetupFetch } = this.state;
         return (
             <div>
-                {DidFetch ? <ExploreEvents EventsData={EventsData} MeetupEventsData={MeetupEvents} /> : <h5>loading...</h5>}
+                {DidFetch ? <ExploreEvents EventsData={EventsData} Fetched={MeetupFetch} meetupEvents={MeetupEvents} /> : <h5>loading...</h5>}
             </div>
         )
     }

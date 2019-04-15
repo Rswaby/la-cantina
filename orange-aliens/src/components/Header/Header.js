@@ -1,8 +1,8 @@
 /** @format */
 
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {Button, AppBar, Typography, Toolbar, withStyles, Modal, Divider, AccountCircle} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Button, AppBar, Typography, Toolbar, withStyles, Modal, Divider, AccountCircle } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { AUTH_TOKEN } from "../../constants";
 
@@ -13,7 +13,7 @@ const styles = theme => ({
       color: 'white',
     },
   },
-  divide: {flex: 1},
+  divide: { flex: 1 },
   right_actions: {
     display: 'flex',
     flex: -1,
@@ -41,16 +41,17 @@ const styles = theme => ({
   appbar: {
     backgroundColor: 'teal',
     height: '60px',
+    marginBottom:'70px'
   },
 });
 
-export function Header({ classes, handleLogout}) {
+export function Header({ classes, handleLogout }) {
   const authuser = localStorage.getItem(AUTH_TOKEN)
   return (
-    <AppBar position="relative" className={classes.appbar}>
+    <AppBar position="fixed" className={classes.appbar}>
       <Toolbar>
         <Typography
-          style={{textDecoration: 'none'}}
+          style={{ textDecoration: 'none' }}
           component={Link}
           to="/"
           className={classes.title}
@@ -66,26 +67,31 @@ export function Header({ classes, handleLogout}) {
               color="inherit"
               children="logout"
               onClick={() => handleLogout()}
+
             />
-          </div>
-        ) : (
-          <div>
-            <Button color="inherit" href="/createEvent">
-              {' '}
-              create event{' '}
-            </Button>
             <Button color="inherit" href="/explore">
               {' '}
               Explore Events{' '}
             </Button>
-            <Button
-              href="/auth"
-              className="login-button"
-              color="inherit"
-              children="Login"
-            />
           </div>
-        )}
+        ) : (
+            <div>
+              <Button color="inherit" href="/createEvent">
+                {' '}
+                create event{' '}
+              </Button>
+              <Button color="inherit" href="/explore">
+                {' '}
+                Explore Events{' '}
+              </Button>
+              <Button
+                href="/auth"
+                className="login-button"
+                color="inherit"
+                children="Login"
+              />
+            </div>
+          )}
       </Toolbar>
     </AppBar>
   );
