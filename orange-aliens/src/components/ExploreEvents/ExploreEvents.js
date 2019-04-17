@@ -55,8 +55,8 @@ class ExploreEvents extends Component {
       <div>
         <Grid className={classes.main_grid} container>
           <Grid item sm={12} md={6} xs={12} lg={6}>
-            {renderMeetupEvents()}
-            {renderEventCardGrid()}
+          {renderEventCardGrid()}
+          {renderMeetupEvents()}
           </Grid>
           <Hidden smDown xsDown mdDown>
             <Grid item sm={12} md={6} xs={12} lg={6} >
@@ -64,7 +64,7 @@ class ExploreEvents extends Component {
                 <Typography align="center" variant="subheading">
                   New York
               </Typography>
-                <EventMapBox width={800} height={600} />
+                <EventMapBox showMarkers={Fetched} width={800} height={600} meetupEvents={meetupEvents} />
               </div>
             </Grid>
           </Hidden>
