@@ -55,8 +55,8 @@ class ExploreEvents extends Component {
       <div>
         <Grid className={classes.main_grid} container>
           <Grid item sm={12} md={6} xs={12} lg={6}>
-            {renderMeetupEvents()}
-            {renderEventCardGrid()}
+          {renderEventCardGrid()}
+          {renderMeetupEvents()}
           </Grid>
           <Hidden smDown xsDown mdDown>
             <Grid item sm={12} md={6} xs={12} lg={6} >
