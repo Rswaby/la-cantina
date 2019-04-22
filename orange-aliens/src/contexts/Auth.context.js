@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { getUserData, loginUser } from '../fetches';
+import { getUserData} from '../fetches';
 
 export const AuthContext = React.createContext();
 

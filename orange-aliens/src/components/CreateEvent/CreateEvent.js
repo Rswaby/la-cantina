@@ -37,6 +37,7 @@ class CreateEvent extends Component {
               neighborhood = value.long_name
               console.log("found", neighborhood)
             }
+            return ""
           })//end of map
         }
 

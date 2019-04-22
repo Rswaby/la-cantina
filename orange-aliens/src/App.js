@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {
 	withStyles,
 
 } from '@material-ui/core';
 import './App.css';
-import { EventMap } from './components/ExploreEvents/EventMap';
 import { LandingPage } from './containers';
 
 

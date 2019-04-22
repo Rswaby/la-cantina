@@ -12,7 +12,7 @@ class EventMapBox extends Component {
   };
 
   render() {
-    const { width, height, meetupEvents, showMarkers, classes } = this.props
+    const { width, height, meetupEvents, showMarkers} = this.props
     const renderMarkers = () => {
       let markers = meetupEvents.events.map((event, index) => {
         return (

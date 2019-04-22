@@ -1,23 +1,14 @@
 
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import { Link } from 'react-router-dom'
-import { Typography, Grid, withStyles, Hidden, List } from '@material-ui/core'
+import { Typography, Grid, withStyles, Hidden} from '@material-ui/core'
 import { EventCard, EventMapBox } from '../../components'
-import { EventMap } from './EventMap'
 import { styles } from './ExploreEvents.styles';
 
 class ExploreEvents extends Component {
 
   render() {
     const { EventsData, classes, meetupEvents, Fetched } = this.props
-    console.log("From Meetup Api: ", meetupEvents)
-    const prod = `https://maps.googleapis.com/maps/api/js?key=${
-      process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-      }&libraries=geometry,drawing,places`
-    const developmentMap = 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
-    //const mapurl = process.env.REACT_APP_GOOGLE_MAPS_API_KEY ? prod : developmentMap
-    const mapurl = developmentMap
     const renderEventCardGrid = () => {
       let events
 
@@ -64,7 +55,7 @@ class ExploreEvents extends Component {
                 <Typography align="center" variant="subheading">
                   New York
               </Typography>
-                <EventMapBox showMarkers={Fetched} width={900} height={600} meetupEvents={meetupEvents} />
+                <EventMapBox showMarkers={Fetched} width={900} height={650} meetupEvents={meetupEvents} />
               </div>
             </Grid>
           </Hidden>
@@ -83,3 +74,9 @@ export default withStyles(styles)(ExploreEvents)
 //                 mapElement={<div style={{ height: `${EventsData.length > 11 ? 340 : 100}%` }} />}
 //                 EventsData={EventsData}
 //               />
+// console.log("From Meetup Api: ", meetupEvents)
+// const prod = `https://maps.googleapis.com/maps/api/js?key=${
+//   process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+//   }&libraries=geometry,drawing,places`
+// const developmentMap = 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
+// //const mapurl = process.env.REACT_APP_GOOGLE_MAPS_API_KEY ? prod : developmentMap

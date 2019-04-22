@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ExploreEvents } from '../../components';
-import { EventsData } from './MockEventsData';
 import { fetchEventByEntityId, fetchAllEvents,getUpcommingEvents} from '../../fetches';
 export default class ExploreEventsContainer extends Component {
     constructor(props) {
