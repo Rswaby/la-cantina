@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, AppBar, Typography, Toolbar, withStyles, Modal, Divider, AccountCircle } from '@material-ui/core';
+import { Button, AppBar, Typography, Toolbar, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { AUTH_TOKEN } from "../../constants";
 
@@ -67,22 +67,18 @@ export function Header({ classes, handleLogout }) {
               color="inherit"
               children="logout"
               onClick={() => handleLogout()}
-
             />
             <Button color="inherit" href="/explore">
-              {' '}
-              Explore Events{' '}
+              Explore Events
             </Button>
           </div>
         ) : (
             <div>
               <Button color="inherit" href="/createEvent">
-                {' '}
-                create event{' '}
+                create event
               </Button>
               <Button color="inherit" href="/explore">
-                {' '}
-                Explore Events{' '}
+                Explore Events
               </Button>
               <Button
                 href="/auth"

@@ -59,7 +59,7 @@ class EventCategoriesContainer extends React.Component {
         return (
             <div>
                 <div style={inlineStyles.header}>
-                    <Typography variant='title' align='left'>
+                    <Typography variant='title' align='center'>
                         Explore Events By Category
                     </Typography>
                 </div>

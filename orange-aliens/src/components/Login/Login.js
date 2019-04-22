@@ -51,7 +51,6 @@ class Login extends Component {
 	render() {
 		const { classes } = this.props;
 
-
 		return (
 			<div>
 				<AppBar position="relative" className={classes.appbar}>
@@ -94,10 +93,9 @@ class Login extends Component {
 						<Grid container justify="center" className={classes.dense}>
 							<Button type='submit' variant="outlined" color="primary" className={classes.button} onClick={(event) => this.handleClick(event)}>
 								Login
-      						</Button>
+      				</Button>
 						</Grid>
 					</Grid>
-
 				</form>
 			</div>
 		);

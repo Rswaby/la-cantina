@@ -64,7 +64,7 @@ class ExploreEvents extends Component {
                 <Typography align="center" variant="subheading">
                   New York
               </Typography>
-                <EventMapBox showMarkers={Fetched} width={800} height={600} meetupEvents={meetupEvents} />
+                <EventMapBox showMarkers={Fetched} width={900} height={600} meetupEvents={meetupEvents} />
               </div>
             </Grid>
           </Hidden>

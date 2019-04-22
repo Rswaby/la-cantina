@@ -4,9 +4,9 @@ import React, {Component} from 'react';
 import Calendar from 'react-calendar';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core';
-import moment from 'moment';
 import {AccountCircle} from '@material-ui/icons';
 import EventCarousel from '../Carousel/Carousel';
+import moment from 'moment';
 import {
   Button,
   Grid,
@@ -15,10 +15,6 @@ import {
   GridListTileBar,
   ListSubheader,
   Paper,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   Typography,
 } from '@material-ui/core';
 

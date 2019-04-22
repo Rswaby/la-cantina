@@ -54,7 +54,6 @@ export  const getUpcommingEvents = async (keywords,limit)=>{
   })
 
   const data = await response.json()
-
   return data
 }
 
