@@ -55,7 +55,7 @@ class EventCategoriesContainer extends React.Component {
     };
 
     render() {
-        const { categories, categoriesFetched } = this.state;
+        const { categories} = this.state;
         return (
             <div>
                 <div style={inlineStyles.header}>

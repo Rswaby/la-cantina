@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import DrawerToggleButton from '../SideDrawer/DrawerToggleButton';
 import { AUTH_TOKEN } from "../../../constants";
 import PropTypes from 'prop-types';
@@ -7,42 +6,10 @@ import { withStyles } from '@material-ui/core';
 import './Toolbar.css';
 
 const styles = theme => ({
-  title: {
-    '&:hover': {
-      backgroundColor: theme.palette.primary,
-      color: 'white',
-    },
-  },
-  divide: { flex: 1 },
   right_actions: {
     display: 'flex',
     flex: -1,
-  },
-  user_name: {
-    marginRight: theme.spacing.unit,
-    marginTop: 'auto',
-    marginBottom: 'auto',
-  },
-  loginPaper: {
-    position: 'absolute',
-    left: '50%',
-    width: '600px',
-    height: '50%',
-    backgroundColor: theme.palette.background.paper,
-    transform: 'translate(-50%, 50%)',
-  },
-  registerPaper: {
-    position: 'absolute',
-    left: '50%',
-    width: '700px',
-    backgroundColor: theme.palette.background.paper,
-    transform: 'translate(-50%, 40%)',
-  },
-  appbar: {
-    backgroundColor: 'teal',
-    height: '60px',
-    marginBottom:'70px'
-  },
+  }
 });
 
 const Toolbar = ({classes, handleLogout, drawerClickHandler}) => {
@@ -61,7 +28,7 @@ const Toolbar = ({classes, handleLogout, drawerClickHandler}) => {
           <ul>
             <li><a href="/">Discover Neighborhoods</a></li>
             <li><a href="/explore">Explore Events</a></li>
-            <li><a children="logout" onClick={() => handleLogout()}> Logout</a></li>
+            <li><a href children="logout" onClick={() => handleLogout()}> Logout</a></li>
           </ul>
         </div>
       </nav>

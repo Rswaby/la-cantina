@@ -84,7 +84,7 @@ class Auth extends Component {
                         </Form>
                         <Message>
                             {login ? "New to us?" : "Already have an account? "}
-                            <a href="#" onClick={() => this.setState({ login: !login })}>{' '}
+                            <a href onClick={() => this.setState({ login: !login })}>{' '}
                                 {login ? "Sign Up" : "Sign In"}</a>
                         </Message>
                     </Grid.Column>

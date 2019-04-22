@@ -8,13 +8,6 @@ import { Grid } from '@material-ui/core';
 
 
 // some nice colors
-const colors = [
-    '#FF8C00', '#C8537B', '#6992C', '#36993',
-    '#0C88C', '#16623A', '#5C1E26', '#4A233',
-    '#800000', '#F94B1E', '#C8537B', '#FBEA86',
-    '#C6162B', '#E4A42E', '#999333', '#937D62'
-];
-
 const styles = {
     box: {
         background: 'teal',

@@ -7,7 +7,7 @@ import 'semantic-ui-css/semantic.min.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Auth } from "../src/components";
 import LHeader from "./components/LHeader/Header";
-import { Header, ExploreEventsContainer, CreateEvent } from './containers';
+import { ExploreEventsContainer, CreateEvent } from './containers';
 import * as serviceWorker from './serviceWorker';
 import EventDescrip from './containers/Event-Descrip/EventDescrip';
 // Graphql components
@@ -64,7 +64,7 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <div>
         <LHeader />
-        <div style={{ marginTop: '35px' }}>
+        <div style={{ marginTop: '55px' }}>
           <Route exact path="/" render={props => <App auth={""} {...props} />} />
           <Route exact path="/auth" component={Auth} />
           <Route exact path="/explore" component={ExploreEventsContainer} />

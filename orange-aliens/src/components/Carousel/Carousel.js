@@ -10,19 +10,19 @@ class EventCarousel extends Component {
     return (
       <Carousel showArrows={true} infiniteLoop={true} showStatus={true}>
         <div>
-          <img src={newyork1} />
+          <img src={newyork1} alt="" />
         </div>
         <div>
-          <img src={newyork2} />
+          <img src={newyork2} alt="" />
         </div>
         <div>
-          <img src={newyork3} />
+          <img src={newyork3} alt="" />
         </div>
         <div>
-          <img src={newyork4} />
+          <img src={newyork4} alt="" />
         </div>
         <div>
-          <img src={newyork5} />
+          <img src={newyork5} alt="" />
         </div>
       </Carousel>
     );

@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Search from '@material-ui/icons/Search';
-import InputAdornment from '@material-ui/core/InputAdornment'; 
 import TextField from '@material-ui/core/TextField';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
@@ -10,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import { fetchNeighborhoods } from '../../fetches';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 const styles = theme => ({
