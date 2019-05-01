@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
-import { AUTH_TOKEN, LOGIN_MUTATION, SIGNUP_MUTATION } from "../../constants";
-import { Mutation } from "react-apollo";
+import { Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import { AUTH_TOKEN } from "../../constants";
+import { registerUser, loginUser } from "../../fetches";
 
 class Auth extends Component {
     constructor(props) {
@@ -9,33 +9,68 @@ class Auth extends Component {
         this.state = {
             login: true,
             email: "",
-            name: "",
+            firstName: "",
+            lastName: "",
             password: "",
+            isLoading: false,
+            Submitted: false,
+            error: '',
+            userData: ''
         }
+
     }
 
     handleChange = name => event => {
-        console.log(event.target.value)
         this.setState({
             [name]: event.target.value,
         });
     };
-
-    _confirm = async data => {
-        console.log("Confirmed")
-        const { token } = this.state.login ? data.login : data.signup
-        this._saveUserData(token)
-        this.props.history.push(`/`)
+    handleSubmit(event) {
+        event.preventDefault();
+        const { login, email, password, firstName, lastName } = this.state;
+        login ? this.login({ email: email, password: password }) : this.register({ first_name: firstName, last_name: lastName, email: email, password: password })
     }
-    _saveUserData = token => {
-        localStorage.setItem(AUTH_TOKEN, token);
-    }
+    login(body) {
+        console.log(body)
+        loginUser(body).then(user => {
+            this.setState({
+                userData: user,
+                isLoading: true,
+            });
+            localStorage.setItem(AUTH_TOKEN,user.token)
+            const { from } = this.props.location.state || { from: { pathname: "/" } };
+            this.props.history.push(from);
 
+        },
+            error => this.setState({
+                error:error.message,
+                isLoading: false
+            })
+        );//end of promise
+
+    }
+    register(body) {
+        console.log(body)
+        registerUser(body).then(user => {
+            this.setState({
+                isLoading: true,
+                userData: user,
+            })
+            const { from } = this.props.location.state || { from: { pathname: "/" } };
+            this.props.history.push(from);
+        },
+            error => this.setState({
+                error: error.message,
+                isLoading: false
+            })
+        )
+    }
     render() {
-        const { login, password, name, email } = this.state;
+        const { login,error } = this.state;
+        console.log("error: ",error)
 
         return (
-            <div className='login-form' style={{marginTop:'70px'}}>
+            <div className='login-form' style={{ marginTop: '70px' }}>
                 <style>{`
                     body > div,
                     body > div > div,
@@ -48,14 +83,21 @@ class Auth extends Component {
                         <Header as='h2' color='teal' textAlign='center'>
                             {login ? "Log-in to your account" : "Create an account"}
                         </Header>
-                        <Form size='large'>
+                        <form size='large' onSubmit={(e) => this.handleSubmit(e)}>
                             <Segment stacked>
                                 {!login &&
                                     (<Form.Input
                                         fluid icon='user'
                                         iconPosition='left'
-                                        placeholder='full name'
-                                        onChange={this.handleChange('name')} />
+                                        placeholder='first name'
+                                        onChange={this.handleChange('firstName')} />
+                                    )}
+                                {!login &&
+                                    (<Form.Input
+                                        fluid icon='user'
+                                        iconPosition='left'
+                                        placeholder='lastName'
+                                        onChange={this.handleChange('lastName')} />
                                     )}
                                 <Form.Input
                                     fluid
@@ -70,18 +112,9 @@ class Auth extends Component {
                                     type='password'
                                     onChange={this.handleChange('password')}
                                 />
-                                <Mutation
-                                    mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
-                                    variables={{ email, password, name }}
-                                    onCompleted={data => this._confirm(data)}>
-                                    {mutation => (
-                                        <Button color='teal' fluid size='large' onClick={mutation}>
-                                            {login ? 'Login' : 'Register'}
-                                        </Button>
-                                    )}
-                                </Mutation>
+                                <input type="submit" value={login ? 'Login' : 'Register'} />
                             </Segment>
-                        </Form>
+                        </form>
                         <Message>
                             {login ? "New to us?" : "Already have an account? "}
                             <a href onClick={() => this.setState({ login: !login })}>{' '}
@@ -96,3 +129,7 @@ class Auth extends Component {
 }
 
 export default Auth;
+
+// <Button color='teal' fluid size='large' onChange={this.handleSubmit()}>
+//                                     {login ? 'Login' : 'Register'}
+//                                 </Button>

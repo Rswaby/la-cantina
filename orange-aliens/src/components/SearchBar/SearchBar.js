@@ -7,7 +7,7 @@ import Autosuggest from 'react-autosuggest';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import { fetchNeighborhoods } from '../../fetches';
+//import { fetchNeighborhoods } from '../../fetches';
 import { Redirect } from 'react-router-dom';
 
 
@@ -53,12 +53,12 @@ class SearchBar extends React.Component {
 
     componentDidMount() {
         if (!this.state.neigborhoodsFetched) {
-            fetchNeighborhoods().then(response => {
-                this.setState({
-                    neighborhoods: response,
-                    neighborhoodsFetched: true
-                });
-            }) 
+            // fetchNeighborhoods().then(response => {
+            //     this.setState({
+            //         neighborhoods: response,
+            //         neighborhoodsFetched: true
+            //     });
+            // }) 
         };
     };
 
@@ -126,11 +126,7 @@ class SearchBar extends React.Component {
                         ref(node);
                         inputRef(node);
                     },
-                    /*startAdornment: (
-                        <InputAdornment position='start'>
-                            <Search />
-                        </InputAdornment>
-                    ),*/
+                   
                 }}
                 {...other}
             />

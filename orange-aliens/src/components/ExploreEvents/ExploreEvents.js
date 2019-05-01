@@ -49,7 +49,7 @@ class ExploreEvents extends Component {
           {renderEventCardGrid()}
           {renderMeetupEvents()}
           </Grid>
-          <Hidden smDown xsDown mdDown>
+          <Hidden smDown xsDown>
             <Grid item sm={12} md={6} xs={12} lg={6} >
               <div style={{ position: "fixed" }}>
                 <Typography align="center" variant="subheading">

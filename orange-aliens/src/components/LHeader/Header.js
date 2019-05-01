@@ -6,29 +6,32 @@ import Backdrop from './Backdrop/Backdrop';
 
 class Header extends Component {
   state = {
-    sideDrawerOpen: false
+    sideDrawerOpen: false,
   };
 
   drawerToggleClickHandler = () => {
     this.setState((prevState) => {
-      return {sideDrawerOpen: !prevState.sideDrawerOpen};
+      return { sideDrawerOpen: !prevState.sideDrawerOpen };
     });
   };
 
   backdropClickHandler = () => {
-    this.setState({sideDrawerOpen: false});
+    this.setState({ sideDrawerOpen: false });
   };
+
+
 
   render() {
     let backdrop;
+    const { sideDrawerOpen } = this.state
 
-    if (this.state.sideDrawerOpen) {
+    if (sideDrawerOpen) {
       backdrop = <Backdrop click={this.backdropClickHandler} />
     }
     return (
       <div>
-        <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
-        <SideDrawer show={this.state.sideDrawerOpen} />
+        <Toolbar drawerClickHandler={this.drawerToggleClickHandler} handleLogout={this.props.handleLogout} />
+        <SideDrawer show={sideDrawerOpen} />
         {backdrop}
       </div>
     );

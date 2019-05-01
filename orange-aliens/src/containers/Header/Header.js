@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { Header } from '../../components'
+import { LHeader } from '../../components'
 import { AuthContext } from '../../contexts/Auth.context'
 import { AUTH_TOKEN } from '../../constants';
+import {
+  withRouter
+} from 'react-router-dom'
+
 class headerWrapper extends Component {
   static contextType = AuthContext
 
@@ -11,39 +15,19 @@ class headerWrapper extends Component {
       loginOpen: false,
       registerOpen: false,
     }
-    this.handleClose = this.handleClose.bind(this)
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleLogout = this.handleLogout.bind(this)
   }
 
-  handleClose(modal) {
-    if (modal === 'login') {
-      this.setState({ loginOpen: false })
-    } else if (modal === 'register') {
-      this.setState({ registerOpen: false })
-    }
-  }
-
-  handleOpen(modal) {
-    if (modal === 'login') {
-      this.setState({ loginOpen: true })
-    } else if (modal === 'register') {
-      this.setState({ registerOpen: true })
-    }
-  }
-
-  handleLogout() {
-    //this.context.onLogout();
+  handleLogout = (USER) => {
+    console.log(USER)
     localStorage.removeItem(AUTH_TOKEN)
-    console.log(History)
+    this.props.history.push('/')
   }
 
-  render() {
-
+  render() {    
     return (
-      <Header handleLogout={this.handleLogout} />
+      <LHeader handleLogout={this.handleLogout} />
     )
   }
 }
 
-export default headerWrapper
+export default withRouter(headerWrapper)

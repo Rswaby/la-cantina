@@ -33,7 +33,7 @@ export default class ExploreEventsContainer extends Component {
              })
         } else if (this.props.match.path === "/explore") {
             //CALL TO BACKEND MEETUP API
-            getUpcommingEvents("free",20)
+            getUpcommingEvents("Free drinks",20)
                 .then(data => {
                     this.setState({
                         MeetupEvents:data.response,
@@ -51,6 +51,7 @@ export default class ExploreEventsContainer extends Component {
     }
     render() {
         const { DidFetch, EventsData, MeetupEvents, MeetupFetch } = this.state;
+        console.log(MeetupEvents)
         return (
             <div>
                 {DidFetch ? <ExploreEvents EventsData={EventsData} Fetched={MeetupFetch} meetupEvents={MeetupEvents} /> : <h5>loading...</h5>}

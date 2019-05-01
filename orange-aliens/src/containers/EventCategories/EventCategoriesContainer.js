@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { EventCategoryCard } from '../../components/';
-import { fetchCategories } from '../../fetches';
+//import { fetchCategories } from '../../fetches';
 
 
 const inlineStyles = {
@@ -26,12 +26,12 @@ class EventCategoriesContainer extends React.Component {
     componentDidMount() {
         const { categoriesFetched } = this.state;
         if (!categoriesFetched) {
-            fetchCategories().then(response => {
-                this.setState({
-                    categories: response,
-                    categoriesFetched: true
-                })
-            })
+            // fetchCategories().then(response => {
+            //     this.setState({
+            //         categories: response,
+            //         categoriesFetched: true
+            //     })
+            // })
         }
     };
 
