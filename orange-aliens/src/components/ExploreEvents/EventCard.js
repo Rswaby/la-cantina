@@ -43,17 +43,17 @@ class EventCard extends Component {
       <Card className={classes.card}>
         <CardActionArea component={Link} to={`/event/${event.id}`}>
           <Grid className={classes.main_grid} container>
-            <CardMedia
+            {/* <CardMedia
               className={classes.cover}
               image="https://www.gstatic.com/webp/gallery/2.jpg"
               title="fake Image"
-            />
+            /> */}
             <Grid item sm={6}>
               <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                   {event.name}
                 </Typography>
-                <Typography component="p">{event.description}</Typography>
+                {/* <Typography component="p">{event.description}</Typography> */}
               </CardContent>
             </Grid>
             <Grid item sm={3}>

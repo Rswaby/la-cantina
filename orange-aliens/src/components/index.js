@@ -11,3 +11,4 @@ export { default as EventCategoryCard } from './EventCategories/EventCategoryCar
 export { default as EventDescription } from './Event-Descrip/EventDescription'
 export { default as SearchBar } from './SearchBar/SearchBar'
 export { default as EventMapBox } from './ExploreEvents/EventMapBox'
+export {default as Card } from './ExploreEvents/Card'
