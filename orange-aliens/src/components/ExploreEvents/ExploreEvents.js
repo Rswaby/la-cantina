@@ -1,8 +1,7 @@
 
 import React, { Component } from 'react'
-import classNames from 'classnames'
 import { Typography, Grid, withStyles, Hidden} from '@material-ui/core'
-import { EventCard, EventMapBox,Card } from '../../components'
+import { EventCard, EventMapBox,Card2 } from '../../components'
 import { styles } from './ExploreEvents.styles';
 
 class ExploreEvents extends Component {
@@ -15,9 +14,10 @@ class ExploreEvents extends Component {
       let events
       if (Fetched && meetupEvents.events.length) {
         events = meetupEvents.events.map((event, index) => (
-          <Grid className={classes.item_grid} container key={index}>
-            <EventCard event={event}/>
-          </Grid>
+         
+
+            <Card2 event={event}/>
+         
         ))
       }
       return events
