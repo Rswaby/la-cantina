@@ -23,10 +23,11 @@ export class AuthProvider extends Component {
         })
     }
 
-    saveUserData(AuthToken, token){
+    saveUserData(AuthToken, token,user){
         localStorage.setItem(AuthToken,token);
         this.state({
-            token:token
+            token:token,
+            user: user
         })
     }
 
