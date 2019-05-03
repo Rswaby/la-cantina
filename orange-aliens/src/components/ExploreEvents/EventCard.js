@@ -1,7 +1,6 @@
-/** @format */
-
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { moment } from "moment";
 import {
   Card,
   CardContent,
@@ -33,21 +32,24 @@ const styles = {
   },
   card: {
     display: 'flex',
+    marginLeft:20,
+    marginRight:20,
+    marginTop:20,
   },
 }
 class EventCard extends Component {
   render() {
-    const {classes, event} = this.props
+    const { classes, event } = this.props
     //const bull = <span className={classes.bullet}>•</span>;
     return (
       <Card className={classes.card}>
         <CardActionArea component={Link} to={`/event/${event.id}`}>
           <Grid className={classes.main_grid} container>
-            {/* <CardMedia
+            {<CardMedia
               className={classes.cover}
-              image="https://www.gstatic.com/webp/gallery/2.jpg"
+              image="..."
               title="fake Image"
-            /> */}
+            />}
             <Grid item sm={6}>
               <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -59,7 +61,7 @@ class EventCard extends Component {
             <Grid item sm={3}>
               <CardContent>
                 <Typography className={classes.pos} color="textSecondary">
-                  {/* {moment(event.time).format("hh:mm a")} */}
+                 {event.local_date} {" : "} {event.local_time}
                 </Typography>
                 <Divider />
                 <Typography className={classes.pos} color="textSecondary">

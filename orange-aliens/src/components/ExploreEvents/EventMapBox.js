@@ -20,6 +20,7 @@ class EventMapBox extends Component {
             longitude={event.group? event.group.lon : event.venue.lon}
             latitude={event.group? event.group.lat: event.venue.lat}
             offsetLeft={-20} offsetTop={-10}
+            key={index}
           >
             <Icon color="blue" size="large"  name="comment" />
             {console.log(event.group? event.group.lon : event.venue.lon)}

@@ -1,23 +1,25 @@
 
 import React, { Component } from 'react'
-import { Typography, Grid, withStyles, Hidden} from '@material-ui/core'
-import { EventCard, EventMapBox,Card2 } from '../../components'
+import { Typography, Grid, withStyles, Hidden } from '@material-ui/core'
+import { EventCard, EventMapBox, Card2 } from '../../components'
 import { styles } from './ExploreEvents.styles';
 
 class ExploreEvents extends Component {
 
   render() {
     const { classes, meetupEvents, Fetched } = this.props
-    
+
     const renderMeetupEvents = () => {
       console.log("meetUp", meetupEvents)
       let events
       if (Fetched && meetupEvents.events.length) {
         events = meetupEvents.events.map((event, index) => (
-         
 
-            <Card2 event={event}/>
-         
+          <Grid className={classes.item_grid} item key={index}>
+            <EventCard event={event} />
+          </Grid>
+
+
         ))
       }
       return events
@@ -29,7 +31,7 @@ class ExploreEvents extends Component {
       <div>
         <Grid className={classes.main_grid} container>
           <Grid item sm={12} md={6} xs={12} lg={6}>
-          {renderMeetupEvents()}
+            {renderMeetupEvents()}
           </Grid>
           <Hidden smDown xsDown>
             <Grid item sm={12} md={6} xs={12} lg={6} >
