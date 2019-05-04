@@ -6,64 +6,15 @@ import App from './App';
 import 'semantic-ui-css/semantic.min.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Auth } from "../src/components";
-import LHeader from "./components/LHeader/Header";
-import { ExploreEventsContainer, CreateEvent } from './containers';
+import { ExploreEventsContainer, CreateEvent, Header } from './containers';
 import * as serviceWorker from './serviceWorker';
 import EventDescrip from './containers/Event-Descrip/EventDescrip';
-// Graphql components
-import { ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { setContext } from 'apollo-link-context'
-import { AUTH_TOKEN } from './constants'
-import { split } from 'apollo-link'
-import { WebSocketLink } from 'apollo-link-ws'
-import { getMainDefinition } from 'apollo-utilities'
 
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
-})
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem(AUTH_TOKEN)
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  }
-})
-
-const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000`,
-  options: {
-    reconnect: true,
-    connectionParams: {
-      authToken: localStorage.getItem(AUTH_TOKEN),
-    },
-  },
-})
-
-const link = split(
-  ({ query }) => {
-    const { kind, operation } = getMainDefinition(query)
-    return kind === 'OperationDefinition' && operation === 'subscription'
-  },
-  wsLink,
-  authLink.concat(httpLink),
-)
-
-const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache(),
-})
 
 ReactDOM.render(
   <Router>
-    <ApolloProvider client={client}>
       <div>
-        <LHeader />
+        <Header />
         <div style={{ marginTop: '55px' }}>
           <Route exact path="/" render={props => <App auth={""} {...props} />} />
           <Route exact path="/auth" component={Auth} />
@@ -73,7 +24,6 @@ ReactDOM.render(
           <Route exact path="/event/:eventid" component={EventDescrip} />
         </div>
       </div>
-    </ApolloProvider>
   </Router>,
   document.getElementById('root'),
 )

@@ -1,44 +1,62 @@
 
 import React, { Component } from 'react'
-import classNames from 'classnames'
-import { Typography, Grid, withStyles, Hidden} from '@material-ui/core'
+import { Typography, Grid, withStyles, Hidden } from '@material-ui/core'
 import { EventCard, EventMapBox } from '../../components'
 import { styles } from './ExploreEvents.styles';
+import { Marker } from 'react-map-gl';
+import { Icon } from 'semantic-ui-react'
 
 class ExploreEvents extends Component {
 
   render() {
-    const { EventsData, classes, meetupEvents, Fetched } = this.props
-    const renderEventCardGrid = () => {
-      let events
-
-      if (EventsData.length) {
-        events = EventsData.map((event, index) => (
-          <div key={index} className={classNames(classes.column, classes.helper)}>
-            <Grid className={classes.item_grid} item sm={12}>
-              <EventCard event={event} />
-            </Grid>
-          </div>
-        ))
-      } else {
-        events = <div className={this.props.classes.root}>{'No Results for this query.'}</div>
-      }
-      return events
-    }
-
+    const { classes, meetupEvents,gridMarker, Fetched,handleMouseOut,handleMouseOver } = this.props
+    
+    
+    
     const renderMeetupEvents = () => {
       console.log("meetUp", meetupEvents)
       let events
       if (Fetched && meetupEvents.events.length) {
         events = meetupEvents.events.map((event, index) => (
-          <Grid className={classes.item_grid} container>
-            {/*<EventCard/>*/}
-            {event.name}
+
+          <Grid className={classes.item_grid} item key={index}>
+            <EventCard 
+            event={event} 
+            handleMouseOut={handleMouseOut}
+            handleMouseOver={handleMouseOver} 
+            cardId={index} />
           </Grid>
+
+
         ))
       }
       return events
 
+    }
+
+    const renderMarkers = () => {
+      
+      
+      if (Fetched && meetupEvents.events.length) {
+        let markers = meetupEvents.events.map((event, index) => {
+          //markerDict.push(false)
+          return (
+            <Marker
+              longitude={event.group ? event.group.lon : event.venue.lon}
+              latitude={event.group ? event.group.lat : event.venue.lat}
+              offsetLeft={-20} offsetTop={-10}
+              key={index}
+            >
+              <Icon color={gridMarker[index]? "red":"blue"} size="large" name="comment" />
+              {console.log(event.group ? event.group.lon : event.venue.lon)}
+              {console.log(event.group ? event.group.lat : event.venue.lat)}
+              {console.log(gridMarker[index])}
+            </Marker>
+          )
+        })
+        //this.updateState(markerDict)
+        return (markers)
+      }
     }
 
 
@@ -46,16 +64,15 @@ class ExploreEvents extends Component {
       <div>
         <Grid className={classes.main_grid} container>
           <Grid item sm={12} md={6} xs={12} lg={6}>
-          {renderEventCardGrid()}
-          {renderMeetupEvents()}
+            {renderMeetupEvents()}
           </Grid>
-          <Hidden smDown xsDown mdDown>
+          <Hidden smDown xsDown>
             <Grid item sm={12} md={6} xs={12} lg={6} >
               <div style={{ position: "fixed" }}>
                 <Typography align="center" variant="subheading">
                   New York
               </Typography>
-                <EventMapBox showMarkers={Fetched} width={900} height={650} meetupEvents={meetupEvents} />
+                <EventMapBox showMarkers={Fetched} width={900} height={650} meetupEvents={renderMarkers} />
               </div>
             </Grid>
           </Hidden>
@@ -66,17 +83,3 @@ class ExploreEvents extends Component {
 }
 
 export default withStyles(styles)(ExploreEvents)
-// <EventMap
-//                 isMarkerShown
-//                 googleMapURL={mapurl}
-//                 loadingElement={<div style={{ height: `100%` }} />}
-//                 containerElement={<div style={{ height: `800px` }} />}
-//                 mapElement={<div style={{ height: `${EventsData.length > 11 ? 340 : 100}%` }} />}
-//                 EventsData={EventsData}
-//               />
-// console.log("From Meetup Api: ", meetupEvents)
-// const prod = `https://maps.googleapis.com/maps/api/js?key=${
-//   process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-//   }&libraries=geometry,drawing,places`
-// const developmentMap = 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
-// //const mapurl = process.env.REACT_APP_GOOGLE_MAPS_API_KEY ? prod : developmentMap

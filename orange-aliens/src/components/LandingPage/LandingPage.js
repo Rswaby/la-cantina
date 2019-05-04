@@ -41,13 +41,3 @@ const LandingPage = (props) => {
 };
 
 export default withStyles(inlineStyles)(LandingPage);
-
-/*
-        <div>
-            <div style={inlineStyles.logoWrapper}>
-                <img src={inlineStyles.logo.src} alt="Logo" height={inlineStyles.logo.height} width={inlineStyles.logo.width}/> 
-            </div>
-            <SearchBarContainer />
-            <EventCategoriesContainer />
-        </div>
-*/

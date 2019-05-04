@@ -37,26 +37,6 @@ export const getAddressInfo = address => {
   return addressInfo
 }
 
-export  const getUpcommingEvents = async (keywords,limit)=>{
-  console.log("inside Async")
-  const params = {
-    keywords:keywords,
-    limit:limit,
-  }
-  
-  const response = await fetch('/meetup',{
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body:JSON.stringify(params),
-    credentials: 'include',
-  })
-
-  const data = await response.json()
-  return data
-}
-
 export const getEvents = eventId => {
   return fetch(`/event/${eventId}`, {
     method: 'GET',
@@ -152,3 +132,58 @@ export const createEvent = event =>
     }
     return Promise.reject({message: 'Unable to create event'})
   })
+///////new fetches
+export  const getUpcommingEvents = async (keywords,limit)=>{
+  console.log("inside Async")
+  const params = {
+    keywords:keywords,
+    limit:limit,
+  }
+  
+  const response = await fetch('/api/meetup',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(params),
+    credentials: 'include',
+  })
+
+  const data = await response.json()
+  //console.log(response.json().body)
+  return data
+}
+
+
+//register 
+export const registerUser = async (body) =>{
+  console.log("inside",body)
+
+  const response = await fetch('/api/signup',{
+    method:'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(body),
+    credentials: 'include',
+  })
+
+  const data = await response.json()
+  return data
+}
+//login
+export const loginUser = async (body) =>{
+  console.log("inside",body)
+
+  const response = await fetch('/api/login',{
+    method:'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(body),
+    credentials: 'include',
+  })
+
+  const data = await response.json()
+  return data
+}
