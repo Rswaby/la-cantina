@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { moment } from "moment";
 import {
   Card,
   CardContent,
@@ -39,11 +38,10 @@ const styles = {
 }
 class EventCard extends Component {
   render() {
-    const { classes, event } = this.props
-    //const bull = <span className={classes.bullet}>•</span>;
+    const { classes, event, handleMouseOver,handleMouseOut, cardId } = this.props
     return (
       <Card className={classes.card}>
-        <CardActionArea component={Link} to={`/event/${event.id}`}>
+        <CardActionArea component={Link} to={`/event/${event.id}`} onMouseOut={() => handleMouseOut(cardId)} onMouseOver={() => handleMouseOver(cardId)}>
           <Grid className={classes.main_grid} container>
             {<CardMedia
               className={classes.cover}
