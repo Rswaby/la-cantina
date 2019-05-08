@@ -153,7 +153,27 @@ export  const getUpcommingEvents = async (keywords,limit)=>{
   //console.log(response.json().body)
   return data
 }
+//get Event. 
+export  const getEvent = async (id,urlname)=>{
+  console.log("inside Async")
+  const params = {
+    id:id,
+    urlname:urlname,
+  }
+  
+  const response = await fetch('/api/meetupEvent',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(params),
+    credentials: 'include',
+  })
 
+  const data = await response.json()
+  //console.log(response.json().body)
+  return data
+}
 
 //register 
 export const registerUser = async (body) =>{

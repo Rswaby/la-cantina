@@ -1,8 +1,8 @@
 /** @format */
 
-import React, {Component} from 'react'
-import {EventDescription} from '../../components'
-import {getEvents} from '../../fetches'
+import React, { Component } from 'react'
+import { EventDescription } from '../../components'
+import { getEvent } from '../../fetches'
 
 class EventDescrip extends Component {
   state = {
@@ -11,18 +11,20 @@ class EventDescrip extends Component {
 
   componentDidMount() {
     console.log('component did mount', this.props)
-    const {eventid} = this.props.match.params
+    const { eventid, eventurl } = this.props.match.params
 
-    getEvents(eventid).then(response => {
-      console.log('Response', response)
-      this.setState({
-        result: response,
+    if (eventid && eventurl) {
+      getEvent(eventid, eventurl).then(response => {
+        console.log('Response', response)
+        this.setState({
+          result: response,
+        })
+        console.log('done')
       })
-      console.log('done')
-    })
+    }
   }
   render() {
-    const {address, attending, category, capacity, date_time, description, name, organizer} = this.state.result
+    const { address, attending, category, capacity, date_time, description, name, organizer } = this.state.result
     console.log('LOLstate', this.state.result)
     return (
       <div>
