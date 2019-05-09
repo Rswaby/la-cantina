@@ -83,7 +83,6 @@ export default class ExploreEventsContainer extends Component {
     }
     render() {
         const { EventsData, MeetupEvents, MeetupFetch, gridMarker } = this.state;
-        console.log("Explore Event Container::: ", gridMarker)
         return (
             <div>
                 {MeetupFetch ? <ExploreEvents

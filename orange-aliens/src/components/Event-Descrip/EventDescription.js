@@ -1,11 +1,12 @@
 /** @format */
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core';
-import {AccountCircle} from '@material-ui/icons';
+import { withStyles } from '@material-ui/core';
+import { AccountCircle } from '@material-ui/icons';
 import EventCarousel from '../Carousel/Carousel';
+import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 import {
   Button,
@@ -37,8 +38,8 @@ const styles = theme => ({
 
 class EventDescription extends Component {
   render() {
-    const {address, attending, capacity, classes, date_time, description, name, organizer} = this.props;
-
+    const { address, attending, capacity, classes, DateTime, description, name } = this.props;
+    console.log(this.props)
     return (
       <div className={classes.root}>
         <Grid
@@ -47,21 +48,19 @@ class EventDescription extends Component {
           direction="column"
           alignItems="center"
           justify="center"
-          style={{minHeight: '100vh'}}>
+          style={{ minHeight: '100vh' }}>
           <Grid container item xs={12} spacing={24}>
             <React.Fragment>
               {/* Event Header */}
               <Grid item lg={8} md={6} xs={12}>
-                <Grid item style={{marginTop: '33px'}}>
+                <Grid item style={{ marginTop: '33px' }}>
                   <Typography variant="display2">{name}</Typography>
                   <Typography>
                     {/* Insert organizer icon */}
-                    <p>{organizer ? `Organizer: ${organizer.first_name} ${organizer.last_name}` : 'God'} </p>
                     {/* Insert location icon */}
-                    <p>{`Address: ${address}`}</p>
+                    <p>{address}</p>
                     {/* Clock icon */}
-                    <p>{`Date: ${moment(date_time).format('dddd, MMMM Do YYYY')}`}</p>
-                    <p>{`Time: ${moment(date_time).format(' hh:mm a')}`}</p>
+                    <p>{moment(DateTime).format("MMM Do YY")}</p>
                   </Typography>
                 </Grid>
               </Grid>
@@ -71,9 +70,9 @@ class EventDescription extends Component {
                   item
                   alignItems="center"
                   justify="center"
-                  style={{marginTop: '33px', width: '200px', height: '100px', textAlign: 'center'}}>
+                  style={{ marginTop: '33px', width: '200px', height: '100px', textAlign: 'center' }}>
                   <Typography variant="h6" align="center" gutterBottom>
-                    Come through! {capacity ? `Capacity: ${capacity}` : 0}
+                    Come through! {capacity ? `Attending: ${capacity}` : 0}
                   </Typography>
                   <p>
                     <Button variant="contained" color="primary">
@@ -89,7 +88,7 @@ class EventDescription extends Component {
               {/* Map and Calender Section */}
               <Grid item lg={4} md={6} xs={12} className={classes.bodySection}>
                 <Grid item alignItems="center" justify="center" className={classes.body}>
-                  <Calendar value={date_time} style={{marginRight: '30px'}} />
+                  <Calendar value={DateTime} style={{ marginRight: '30px' }} />
                 </Grid>
               </Grid>
               {/* Description Section */}
@@ -97,26 +96,26 @@ class EventDescription extends Component {
                 <Grid item className={classes.body}>
                   <Grid className={classes.paper.description}>
                     {/* {description ? `Details: ${description}` : 'One moment!'} */}
-                    <Typography variant="h5" gutterBottom style={{fontWeight: 'bold'}}>
+                    <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold' }}>
                       Details
                     </Typography>
-                    {description ? `${description}` : 'One moment!'}
+                    {description ? <ReactMarkdown source={description} escapeHtml={false}/> : 'One moment!'}
                   </Grid>
                 </Grid>
               </Grid>
               {/* Attendees */}
               <Grid item lg={4} md={12} xs={12} className={classes.bodySection}>
                 <GridList cellHeight={180} className={classes.gridList}>
-                  <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
+                  <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
                     <ListSubheader component="div">Attendees</ListSubheader>
                   </GridListTile>
                   {attending
                     ? attending.map(attendee => (
-                        <GridListTile style={{MarginLeft: 'auto', marginRight: 'auto', width: '50%'}}>
-                          <AccountCircle style={{fontSize: 150}} />
-                          <GridListTileBar title={attendee.first_name} />
-                        </GridListTile>
-                      ))
+                      <GridListTile style={{ MarginLeft: 'auto', marginRight: 'auto', width: '50%' }}>
+                        <AccountCircle style={{ fontSize: 150 }} />
+                        <GridListTileBar title={attendee.first_name} />
+                      </GridListTile>
+                    ))
                     : null}
                 </GridList>
               </Grid>

@@ -41,7 +41,7 @@ class EventCard extends Component {
     const { classes, event, handleMouseOver,handleMouseOut, cardId } = this.props
     return (
       <Card className={classes.card}>
-        <CardActionArea component={Link} to={`/event/${event.id}`} onMouseOut={() => handleMouseOut(cardId)} onMouseOver={() => handleMouseOver(cardId)}>
+        <CardActionArea component={Link} to={`/event/${event.id}/${event.group.urlname}`} onMouseOut={() => handleMouseOut(cardId)} onMouseOver={() => handleMouseOver(cardId)}>
           <Grid className={classes.main_grid} container>
             {<CardMedia
               className={classes.cover}

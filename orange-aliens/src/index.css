@@ -25,3 +25,23 @@ code {
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
 }
+
+
+.searchBar {
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  width: inherit;
+}
+.input {
+  margin-left: 8;
+  flex: 1;
+}
+@media only screen and (min-device-width: 354px) and (max-device-height: 813px) {
+  .searchBar {
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    width: 325px;
+  }
+}
