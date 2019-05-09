@@ -50,7 +50,7 @@ class EventCard extends Component {
             />}
             <Grid item sm={6}>
               <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                <Typography className={classes.title} color="textPrimary" gutterBottom>
                   {event.name}
                 </Typography>
                 {/* <Typography component="p">{event.description}</Typography> */}
@@ -58,12 +58,12 @@ class EventCard extends Component {
             </Grid>
             <Grid item sm={3}>
               <CardContent>
-                <Typography className={classes.pos} color="textSecondary">
-                 {event.local_date} {" : "} {event.local_time}
+                <Typography className={classes.pos} color="textPrimary">
+                 {event.local_date}
                 </Typography>
                 <Divider />
-                <Typography className={classes.pos} color="textSecondary">
-                  {event.address}
+                <Typography className={classes.pos} color="textPrimary">
+                  {event.venue? event.venue.address_1: "no address"}
                 </Typography>
               </CardContent>
             </Grid>

@@ -1,29 +1,25 @@
 
 import React, { Component } from 'react'
-import { Typography, Grid, withStyles, Hidden } from '@material-ui/core'
+import { Typography, Grid, withStyles, Hidden} from '@material-ui/core'
 import { EventCard, EventMapBox } from '../../components'
 import { styles } from './ExploreEvents.styles';
 import { Marker } from 'react-map-gl';
 import { Icon } from 'semantic-ui-react'
-
 class ExploreEvents extends Component {
 
   render() {
-    const { classes, meetupEvents,gridMarker, Fetched,handleMouseOut,handleMouseOver } = this.props
-    
-    
-    
+    const { classes, meetupEvents, gridMarker, Fetched, handleMouseOut, handleMouseOver, searchResultsfor } = this.props
     const renderMeetupEvents = () => {
       let events
       if (Fetched && meetupEvents.events.length) {
         events = meetupEvents.events.map((event, index) => (
 
           <Grid className={classes.item_grid} item key={index}>
-            <EventCard 
-            event={event} 
-            handleMouseOut={handleMouseOut}
-            handleMouseOver={handleMouseOver} 
-            cardId={index} />
+            <EventCard
+              event={event}
+              handleMouseOut={handleMouseOut}
+              handleMouseOver={handleMouseOver}
+              cardId={index} />
           </Grid>
 
 
@@ -34,8 +30,8 @@ class ExploreEvents extends Component {
     }
 
     const renderMarkers = () => {
-      
-      
+
+
       if (Fetched && meetupEvents.events.length) {
         let markers = meetupEvents.events.map((event, index) => {
           //markerDict.push(false)
@@ -46,7 +42,7 @@ class ExploreEvents extends Component {
               offsetLeft={-20} offsetTop={-10}
               key={index}
             >
-              <Icon color={gridMarker[index]? "red":"blue"} size="large" name="comment" />
+              <Icon color={gridMarker[index] ? "red" : "blue"} size="large" name="comment" />
             </Marker>
           )
         })
@@ -66,7 +62,7 @@ class ExploreEvents extends Component {
             <Grid item sm={12} md={6} xs={12} lg={6} >
               <div style={{ position: "fixed" }}>
                 <Typography align="center" variant="subheading">
-                  New York
+                  New York: search results for {searchResultsfor}
               </Typography>
                 <EventMapBox showMarkers={Fetched} width={900} height={650} meetupEvents={renderMarkers} />
               </div>
