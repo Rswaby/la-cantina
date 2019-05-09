@@ -14,7 +14,6 @@ class ExploreEvents extends Component {
     
     
     const renderMeetupEvents = () => {
-      console.log("meetUp", meetupEvents)
       let events
       if (Fetched && meetupEvents.events.length) {
         events = meetupEvents.events.map((event, index) => (
@@ -48,9 +47,6 @@ class ExploreEvents extends Component {
               key={index}
             >
               <Icon color={gridMarker[index]? "red":"blue"} size="large" name="comment" />
-              {console.log(event.group ? event.group.lon : event.venue.lon)}
-              {console.log(event.group ? event.group.lat : event.venue.lat)}
-              {console.log(gridMarker[index])}
             </Marker>
           )
         })

@@ -2,42 +2,57 @@
 
 import React, { Component } from 'react'
 import { EventDescription } from '../../components'
-import { getEvent } from '../../fetches'
+import { getEvent, getEventPhotos } from '../../fetches'
 
 class EventDescrip extends Component {
   state = {
-    result: [],
+    eventDetails: '',
+    eventPhtotos: '',
+    fetched: false
   }
 
   componentDidMount() {
-    console.log('component did mount', this.props)
+    //console.log('component did mount', this.props)
     const { eventid, eventurl } = this.props.match.params
 
     if (eventid && eventurl) {
-      getEvent(eventid, eventurl).then(response => {
-        console.log('Response', response)
+      console.log("Inside event fetch")
+      getEvent(eventid,eventurl).then(data=>{
         this.setState({
-          result: response,
+          eventDetails:data.response,
+          fetched:true
         })
-        console.log('done')
       })
+
+      getEventPhotos(eventurl).then(data=>{
+        this.setState({
+          eventPhtotos:data.response
+        })
+      })
+
     }
   }
   render() {
-    const { address, attending, category, capacity, date_time, description, name, organizer } = this.state.result
-    console.log('LOLstate', this.state.result)
+    const { fetched, eventDetails} = this.state;
+    let day,DateTime;
+    if (fetched && eventDetails) {
+      day = eventDetails.local_date.split("-")
+      DateTime = new Date(day[0], day[1] - 1, day[2])
+    }
+    console.log("container ", eventDetails)
     return (
       <div>
-        <EventDescription
-          address={address}
-          attending={attending}
-          category={category}
-          capacity={capacity}
-          DateTime={date_time}
-          description={description}
-          name={name}
-          organizer={organizer}
-        />
+        {fetched && eventDetails ? <EventDescription
+          address={eventDetails.venue ? eventDetails.venue.address_1 : "no address provided"  }
+          attending={null}
+          category={null}
+          capacity={eventDetails.yes_rsvp_count}
+          DateTime={DateTime}
+          description={eventDetails.description}
+          name={eventDetails.name}
+          organizer={null}
+        /> : <div>loading ...</div>
+        }
       </div>
     )
   }

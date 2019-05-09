@@ -175,6 +175,26 @@ export  const getEvent = async (id,urlname)=>{
   return data
 }
 
+export  const getEventPhotos = async (urlname)=>{
+  console.log("inside Async")
+  const params = {
+    urlname:urlname
+  }
+  
+  const response = await fetch('/api/meetupEventPhotos',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(params),
+    credentials: 'include',
+  })
+
+  const data = await response.json()
+  //console.log(response.json().body)
+  return data
+}
+
 //register 
 export const registerUser = async (body) =>{
   console.log("inside",body)
