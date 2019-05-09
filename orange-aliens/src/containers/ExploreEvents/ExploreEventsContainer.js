@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ExploreEvents } from '../../components';
-import { fetchEventByEntityId, fetchAllEvents, getUpcommingEvents } from '../../fetches';
+import { fetchAllEvents, getUpcommingEvents } from '../../fetches';
+import { Loader } from 'semantic-ui-react'
 export default class ExploreEventsContainer extends Component {
     constructor(props) {
         super(props)
@@ -18,16 +19,9 @@ export default class ExploreEventsContainer extends Component {
 
     componentDidMount() {
         const { params } = this.props.match;
-        if (params && params.entityName && params.entityId) {
-            fetchEventByEntityId(params.entityName, params.entityId).then(response => {
-                this.setState({
-                    EventsData: response.events,
-                    DidFetch: true
-                })
-
-            })
+        if (params && params.text) {
             //CALL TO BACKEND MEETUP API
-            getUpcommingEvents("free", 40)
+            getUpcommingEvents(params.text, 40)
                 .then(data => {
 
                     let dict = {}
@@ -43,7 +37,7 @@ export default class ExploreEventsContainer extends Component {
                 })
         } else if (this.props.match.path === "/explore") {
             //CALL TO BACKEND MEETUP API
-            getUpcommingEvents("Free drinks", 40)
+            getUpcommingEvents("New York", 40)
                 .then(data => {
                     let dict = []
                     data.response.events.map((event, index) => {
@@ -67,18 +61,18 @@ export default class ExploreEventsContainer extends Component {
 
     handleMouseOver(cardId) {
         const { gridMarker } = this.state;
-        
+
         gridMarker[cardId] = true
         this.setState({
-            gridMarker:gridMarker
+            gridMarker: gridMarker
         })
     }
     handleMouseOut(cardId) {
         const { gridMarker } = this.state;
-        
+
         gridMarker[cardId] = false
         this.setState({
-            gridMarker:gridMarker
+            gridMarker: gridMarker
         })
     }
     render() {
@@ -88,10 +82,11 @@ export default class ExploreEventsContainer extends Component {
                 {MeetupFetch ? <ExploreEvents
                     handleMouseOut={this.handleMouseOut}
                     handleMouseOver={this.handleMouseOver}
+                    searchResultsfor={this.props.match.params.text}
                     gridMarker={gridMarker}
                     EventsData={EventsData}
                     Fetched={MeetupFetch}
-                    meetupEvents={MeetupEvents} /> : <h5>loading...</h5>}
+                    meetupEvents={MeetupEvents} /> : <Loader indeterminate>getting events based on {this.props.match.params.text}</Loader>}
             </div>
         )
     }

@@ -20,7 +20,7 @@ ReactDOM.render(
           <Route exact path="/auth" component={Auth} />
           <Route exact path="/explore" component={ExploreEventsContainer} />
           <Route exact path="/createEvent" component={CreateEvent} />
-          <Route exact path="/explore/:entityName/:entityId" component={ExploreEventsContainer} />
+          <Route exact path="/explore/:text/" component={ExploreEventsContainer} />
           <Route exact path="/event/:eventid/:eventurl" component={EventDescrip} />
         </div>
       </div>

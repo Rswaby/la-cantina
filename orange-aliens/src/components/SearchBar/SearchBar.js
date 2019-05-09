@@ -6,6 +6,7 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Divider from '@material-ui/core/Divider';
+import { withRouter } from 'react-router'
 const styles = {
     root: {
         padding: '2px 4px',
@@ -27,16 +28,34 @@ const styles = {
     },
 };
 class SearchBar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            query: '',
+            isRedirected: false
+        }
+    }
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+    }
+    handleSubmit(e) {
+        e.preventDefault()
+        this.props.history.push(`/explore/${this.state.query}`)
+    }
     render() {
         const { classes } = this.props;
-
         return (
             <Paper className="searchBar" elevation={1}>
                 <IconButton className={classes.iconButton} aria-label="Search">
                     <SearchIcon />
                 </IconButton>
                 <Divider className={classes.divider} />
-                <InputBase className="searchBar" placeholder="Search For Events" />
+                <form onSubmit={(e) => this.handleSubmit(e)}>
+                    <InputBase onChange={this.handleChange('query')} className="searchBar" placeholder="Search " />
+                </form>
             </Paper>
         );
     }
@@ -44,9 +63,5 @@ class SearchBar extends Component {
 SearchBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(SearchBar);
+export default withStyles(styles)(withRouter(SearchBar));
 
-
-// if (this.state.isRedirected) {
-//     return <Redirect to={`/explore/neighborhood/${this.state.neighborhoodId}`} />;
-// };
