@@ -18,27 +18,23 @@ class EventCategoriesContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            categories: [],
-            categoriesFetched: false
+            categories: [
+                { name: "manhattan" },
+                { name: "manhattan" },
+                { name: "manhattan" },
+                { name: "manhattan" },
+                { name: "manhattan" },
+                { name: "manhattan" },
+                { name: "manhattan" },
+                { name: "manhattan" }
+            ],
+            categoriesFetched: true
         };
     };
 
-    componentDidMount() {
-        const { categoriesFetched } = this.state;
-        if (!categoriesFetched) {
-            // fetchCategories().then(response => {
-            //     this.setState({
-            //         categories: response,
-            //         categoriesFetched: true
-            //     })
-            // })
-        }
-    };
-
     renderCategories() {
-        // render categories in 'Explore Events By Category' section
         const categoryCards = this.state.categories.map(category => {
-            return <EventCategoryCard categoryId={category.id} categoryName={category.name} href={`/explore/category/${category.id}`} />
+            return <EventCategoryCard categoryId={category.name} categoryName={category.name} href={`/explore/${category.name}`} />
         });
 
         return (
@@ -55,15 +51,15 @@ class EventCategoriesContainer extends React.Component {
     };
 
     render() {
-        const { categories} = this.state;
+        const { categories } = this.state;
         return (
             <div>
                 <div style={inlineStyles.header}>
                     <Typography variant='title' align='center'>
-                        Explore Events By Category
+                        Popular neighborhoods
                     </Typography>
                 </div>
-                {categories? this.renderCategories():<div>loading...</div>}
+                {categories ? this.renderCategories() : <div>loading...</div>}
             </div>
         );
     };

@@ -8,6 +8,7 @@ import { AccountCircle } from '@material-ui/icons';
 import EventCarousel from '../Carousel/Carousel';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
+import { AUTH_TOKEN } from "../../constants";
 import {
   Button,
   Grid,
@@ -38,8 +39,10 @@ const styles = theme => ({
 
 class EventDescription extends Component {
   render() {
-    const { address, attending, capacity, classes, DateTime, description, name } = this.props;
-    console.log(this.props)
+    const { address, attending, capacity, classes, DateTime, description, name, handleJoinEvent, status } = this.props;
+    console.log(localStorage.getItem(AUTH_TOKEN))
+
+    //const status = localStorage.get('status') ? localStorage.get('status') : false;
     return (
       <div className={classes.root}>
         <Grid
@@ -75,9 +78,18 @@ class EventDescription extends Component {
                     Come through! {capacity ? `Attending: ${capacity}` : 0}
                   </Typography>
                   <p>
-                    <Button variant="contained" color="primary">
+                  {/* get localstorage status */}
+                  {status ? (
+                    <Button variant="contained" color="primary"
+                    onClick={handleJoinEvent}>
+                      Leave Down
+                    </Button>
+                  ) : (
+                    <Button variant="contained" color="primary"
+                    onClick={handleJoinEvent}>
                       Link Up
                     </Button>
+                  )}
                   </p>
                 </Grid>
               </Grid>
