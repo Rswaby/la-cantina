@@ -19,14 +19,14 @@ class EventCategoriesContainer extends React.Component {
         super(props);
         this.state = {
             categories: [
-                { name: "manhattan" },
-                { name: "manhattan" },
-                { name: "manhattan" },
-                { name: "manhattan" },
-                { name: "manhattan" },
-                { name: "manhattan" },
-                { name: "manhattan" },
-                { name: "manhattan" }
+                { name: "China Town" },
+                { name: "MidTown" },
+                { name: "Williamsburg" },
+                { name: "Harlem" },
+                { name: "Sofo" },
+                { name: "East Village" },
+                { name: "Astoria" },
+                { name: "Tribeca" }
             ],
             categoriesFetched: true
         };

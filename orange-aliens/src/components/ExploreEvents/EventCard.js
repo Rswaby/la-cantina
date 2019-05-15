@@ -9,8 +9,12 @@ import {
   CardMedia,
   CardActionArea,
   Divider,
+  FormHelperText,
 } from '@material-ui/core'
 const styles = {
+  info_card: {
+    float: 'right',
+  },
   main_grid: {
     'margin-top': 15,
   },
@@ -43,11 +47,6 @@ class EventCard extends Component {
       <Card className={classes.card}>
         <CardActionArea component={Link} to={`/event/${event.id}/${event.group.urlname}`} onMouseOut={() => handleMouseOut(cardId)} onMouseOver={() => handleMouseOver(cardId)}>
           <Grid className={classes.main_grid} container>
-            {<CardMedia
-              className={classes.cover}
-              image="..."
-              title="fake Image"
-            />}
             <Grid item sm={6}>
               <CardContent>
                 <Typography className={classes.title} color="textPrimary" gutterBottom>
@@ -56,8 +55,8 @@ class EventCard extends Component {
                 {/* <Typography component="p">{event.description}</Typography> */}
               </CardContent>
             </Grid>
-            <Grid item sm={3}>
-              <CardContent>
+            <Grid item sm={6}>
+              <CardContent className={classes.info_card}>
                 <Typography className={classes.pos} color="textPrimary">
                  {event.local_date}
                 </Typography>
